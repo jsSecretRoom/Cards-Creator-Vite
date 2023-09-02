@@ -1,0 +1,193 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  width: 100%;
+  height: 100%;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #496579;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+/*--------------------*/
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+:focus {
+  color: crimson;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+a {
+  font-weight: 500;
+  color: #257fe6;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #02c8ff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+/*--------------------*/
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input{
+  background-color: #ffffff;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0 10px;
+  margin: 2px;
+  width: 290px;
+  height: 25px;
+  @media (max-width: 425px) {
+    width: auto;
+    
+  } 
+}
+
+input:active{
+  color: crimson;
+  
+}
+
+input:focus {
+  border-color: #00aaff; /* Измените цвет на желаемый */
+  
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+/*--------------------*/
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  margin: 5px;
+  background-color: #535bf2;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #ffffff;
+  background-color: #53a8f2;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+/*--------------------*/
+
+/* Ширина скроллбара */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Основной фон */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Ползунок */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+/* Ползунок при наведении */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+/*----------them----------*/
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #1d4365;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #1b26ff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

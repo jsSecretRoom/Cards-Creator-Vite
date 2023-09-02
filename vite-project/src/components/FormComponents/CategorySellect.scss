@@ -1,0 +1,20 @@
+.select-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 5px 0;
+}
+.custom-select {
+    padding: 10px;
+    font-size: 16px;
+    width: 290px;
+    border-radius: 10px;
+}
+  
+.selected-option {
+    margin-top: 10px;
+    font-size: 18px;
+}
+label{
+    font-size: 20px;
+}

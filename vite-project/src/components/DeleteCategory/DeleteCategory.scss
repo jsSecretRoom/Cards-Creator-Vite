@@ -1,0 +1,9 @@
+.delete-category{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 20px 0;
+    input{
+      width: 100%;
+    }
+}

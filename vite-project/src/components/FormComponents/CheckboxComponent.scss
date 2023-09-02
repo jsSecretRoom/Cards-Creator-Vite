@@ -1,0 +1,37 @@
+.checkbox{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    font-size: 20px;
+    .toggle-checkbox {
+      display: none;
+    }
+    
+    .toggle-label {
+      display: inline-block;
+      position: relative;
+      width: 60px;
+      height: 30px;
+      cursor: pointer;
+      background-color: #ffffff;
+      border-radius: 30px;
+  
+      .toggle-button {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        background-color: #848181;
+        border: 2px solid #000000;
+        border-radius: 50%;
+        transition: left 0.2s;
+      }
+    }
+    .toggle-checkbox:checked + .toggle-label .toggle-button {
+      left: 50%;
+      background-color: #00aaff;
+      border-color: #2fff00;
+    }
+}
