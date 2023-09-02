@@ -81,33 +81,8 @@
         }
         
         .pages-block {
-          background-color: #0F9D95;
           padding: 20px;
-          .help-info{
-            text-align: center;
-            padding: 0 20px 20px 20px;
-            position: relative;
-            button{
-              position: absolute;
-              left: 0;
-              color: yellow;
-              background-color: crimson;
-              &:hover{
-                background-color: darkmagenta;
-              }
-              img{
-                height: 25px;
-                padding: 0 10px 0 0;
-              }
-            }
-          }
-          .category-lyst {
-            columns: 2;
-            button{
-              padding: 0 10px;
-              height: 30px;
-            }
-          }
+          background-color: #0F9D95;
         }
       }
     }

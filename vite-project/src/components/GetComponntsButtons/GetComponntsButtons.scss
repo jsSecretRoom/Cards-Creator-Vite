@@ -1,0 +1,15 @@
+ul {
+  columns: 2;
+  button{
+    padding: 0 0;
+    height: 30px;
+    color: brown;
+    a{
+      padding: 3px 10px;
+      color: rgb(14, 22, 134);
+      &:hover{
+        color: rgb(57, 0, 95);
+      }
+    }
+  }
+}

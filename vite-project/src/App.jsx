@@ -4,11 +4,12 @@ import './App.scss'
 import CategoryInput from './components/FormComponents/CategoryInput'
 import CategorySellect from './components/FormComponents/CategorySellect'
 import CheckboxComponent from './components/FormComponents/CheckboxComponent';
-import DeleteCategory from './components/DeleteCategory/DeleteCategory';
+import FirstPage from './components/FirstPage/FirstPage';
+import CollectionPage from './components/CollectionPage/CollectionPage';
 
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { app } from '../firebase';
-
+import { Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './auth';
 import React, { useState } from 'react';
 
@@ -197,20 +198,10 @@ function App() {
           </div>
           
           <div className='pages-block'>
-            <div className='help-info'>
-              {/* <button>
-                <img src={reactLogo} alt="" />
-                Back
-              </button> */}
-              <h2>Категорії</h2>
-            </div>
-            <ul className='category-lyst'>
-              <button>catewerewrwrgory</button>
-              <button>crtrtrerwewretwertwtrrtr</button>
-              <button>category</button>
-              <button>category</button>
-            </ul>
-            <DeleteCategory/>
+          <Routes>
+            <Route path="/" element={<FirstPage />} />
+            <Route path="/collections/:collectionName" element={<CollectionPage />} />
+          </Routes>
           </div>
         </section>
       </main>
