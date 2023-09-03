@@ -23,7 +23,7 @@ function GetComponntsButtons({ onCategoryChange }) {
     <ul className='category-list'>
       {collectionNames.map((name) => (
         <button key={name}>
-          <Link to={`/Cards-Creator/${name}`}>{name}</Link>
+          <Link to={`/collections/${name}`}>{name}</Link>
         </button>
       ))}
     </ul>

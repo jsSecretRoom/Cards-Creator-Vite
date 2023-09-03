@@ -1,6 +1,6 @@
 import './DeleteCategory.scss';
 import React, { useState } from 'react';
-import { getFirestore, collection, getDocs, deleteDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, deleteDoc, query, where, doc, getDoc } from 'firebase/firestore';
 import { app } from '../../../firebase';
 
 const DeleteCategory = () => {
@@ -8,18 +8,30 @@ const DeleteCategory = () => {
 
   const handleDeleteClick = async () => {
     const firestore = getFirestore(app);
-    const categoryRef = collection(firestore, categoryName);
 
     try {
-      // Получаем все документы в коллекции
-      const querySnapshot = await getDocs(categoryRef);
+      // Проверяем, существует ли указанная категория
+      const categoryQuery = query(collection(firestore, 'AllCollections'), where('collectionName', '==', categoryName));
+      const categorySnapshot = await getDocs(categoryQuery);
 
-      // Удаляем каждый документ
-      querySnapshot.forEach(async (doc) => {
+      if (categorySnapshot.size === 0) {
+        console.log(`Колекцію "${categoryName}" не знайдено.`);
+        return;
+      }
+
+      // Удаляем категорию из AllCollections
+      const categoryDoc = categorySnapshot.docs[0];
+      await deleteDoc(categoryDoc.ref);
+      console.log(`Колекцію "${categoryName}" видалено.`);
+
+      // Удаляем соответствующую коллекцию
+      const categoryRef = collection(firestore, categoryName);
+      const categorySnapshot2 = await getDocs(categoryRef);
+      categorySnapshot2.forEach(async (doc) => {
         await deleteDoc(doc.ref);
       });
 
-      console.log(`Коллекцію "${categoryName}" видалено.`);
+      console.log(`Колекцію "${categoryName}" видалено.`);
     } catch (error) {
       console.error('Помилка під час видалення колекції:', error);
     }

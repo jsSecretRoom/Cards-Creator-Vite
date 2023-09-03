@@ -1,0 +1,135 @@
+.colection {
+    .collection-head {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0 0 20px 0;
+        button{
+            background-color: #FCFF5F;
+            border-radius: 50px;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            column-gap: 10px;
+            img{
+                height: 20px;
+            }
+        }
+    }
+    .card-list{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 20px 0 0 0; 
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        .card-container{
+            .card {
+                height: 450px;
+                width: 250px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 5px;
+                background-color: #FF7D34;
+                border-radius: 10px;
+                .card-head {
+                    background-color: white;
+                    height: 300px;
+                    border-radius: 10px;
+                    .fichs {
+                        padding: 10px;
+                        .body-collor {
+                            display: flex;
+                            justify-content: space-between;
+                            height: auto;
+                            
+                            p{
+                                color: black;
+                                background-color: #45FF58;
+                                padding: 0 10px;
+                                border-radius: 50px;
+                            }
+                            img{
+                                height: 30px;
+                            }
+                        }
+                    }
+                    .product-foto {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        img{
+                            width: 200px;
+                            height: 220px;
+                            object-fit: cover;
+                            border-radius: 10px;
+                        }
+                    }
+                    .warning-fich {
+                        text-align: center;
+                        p{
+                            color: crimson;
+                        }
+                    }
+                }
+                .card-body{
+                    background: linear-gradient(90deg, rgba(50, 57, 50, 0.92) 0%, rgba(106, 182, 109, 0.92) 100%);
+                    height: 135px;
+                    padding: 10px;
+                    margin: 5px 0 0 0;
+                    border-radius: 10px;
+                    .card-deskription{
+                        .product-name{
+                            font-size: 18px;
+                            color: aqua;
+                            overflow-wrap: break-word;
+                            .desc{
+                                color: rgb(255, 255, 255);
+                                font-size: 14px;
+                                overflow-wrap: break-word;
+                            }
+                        }
+                    }
+                    .charecters{
+                        .price-info {
+                            
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-around;
+                            .price{
+                                color: white;
+                                font-size: 14px;
+                                text-decoration: line-through;
+                            }
+                            .discountedPrice{
+                                color: crimson;
+                                font-weight: 800;
+                                font-size: 24px;
+                            }
+                            
+                        }
+                        
+                    }
+                }
+               
+                
+                
+            }
+            .card-info{
+                background-color: rgb(49, 144, 233);
+                border-radius: 10px;
+                margin: 5px 0 0 0;
+                padding: 5px;
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+                li{
+                    padding: 0 5px;
+                }
+                
+            }
+        }
+        
+    }
+
+}

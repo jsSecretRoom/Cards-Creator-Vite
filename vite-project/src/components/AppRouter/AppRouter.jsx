@@ -10,7 +10,7 @@ function AppRouter() {
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/firstpage" element={<FirstPage />} />
-        <Route path="/collections/:collectionName" component={CollectionPage} />
+        <Route path="/Cards-Creator/:collectionName" component={CollectionPage} />
       </Switch>
     </Router>
   );

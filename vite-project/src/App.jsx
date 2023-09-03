@@ -1,25 +1,22 @@
 import './App.scss'
-
-// import reactLogo from './assets/react.svg'
-import CategoryInput from './components/FormComponents/CategoryInput'
-import CategorySellect from './components/FormComponents/CategorySellect'
+import React, { useState } from 'react';
+import { getFirestore, collection, addDoc, query, where, getDocs } from 'firebase/firestore';
+import { app } from '../firebase';
+import { Route, Routes } from 'react-router-dom';
+import { AuthProvider } from './auth';
+import CategoryInput from './components/FormComponents/CategoryInput';
+import CategorySellect from './components/FormComponents/CategorySellect';
 import CheckboxComponent from './components/FormComponents/CheckboxComponent';
 import FirstPage from './components/FirstPage/FirstPage';
 import CollectionPage from './components/CollectionPage/CollectionPage';
 
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import { app } from '../firebase';
-import { Route, Routes } from 'react-router-dom';
-import { AuthProvider } from './auth';
-import React, { useState } from 'react';
-
 export const firestore = getFirestore(app);
-
 
 function App() {
   const [chooseCategory, setCategory] = useState(false);
   const [categoryValue, setCategoryValue] = useState('');
   const [customCollectionName, setCustomCollectionName] = useState('');
+  const [collectionExists, setCollectionExists] = useState(false); // Состояние для проверки существования коллекции
 
   const [productName, setProductNameValue] = useState('');
   const [productDescription, setProductDescriptionValue] = useState('');
@@ -45,37 +42,47 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const collectionRef = collection(firestore, chooseCategory ? categoryValue : customCollectionName);
     const nameData = collection(firestore, 'AllCollections');
 
-    const documentData = {
-      productNameKey: productName,
-      productDescriptionKey: productDescription,
-      productPhotoKey: productPhoto,
-      initialPriceKey: initialPrice,
-      discountedPriceKey: discountedPrice,
-      indicatorNewKey: indicatorNew,
-      indicatorPopularKey: indicatorPopular,
-      indicatorIncludeKey: indicatorInclude,
-      indicatorEndKey: indicatorEnd,
-      indicatorDiscountKey: indicatorDiscount,
-    };
+    const querySnapshot = await getDocs(query(nameData, where('collectionName', '==', customCollectionName)));
 
-    
-    const colectionsNameData = {
-      collectionName: customCollectionName
-    }
+    if (querySnapshot.empty) {
+      const collectionRef = collection(firestore, chooseCategory ? categoryValue : customCollectionName);
 
-    try {
-      const docRef = await addDoc(collectionRef, documentData);
-      const docName = await addDoc(nameData, colectionsNameData);
+      const documentData = {
+        productNameKey: productName,
+        productDescriptionKey: productDescription,
+        productPhotoKey: productPhoto,
+        initialPriceKey: initialPrice,
+        discountedPriceKey: discountedPrice,
+        indicatorNewKey: indicatorNew,
+        indicatorPopularKey: indicatorPopular,
+        indicatorIncludeKey: indicatorInclude,
+        indicatorEndKey: indicatorEnd,
+        indicatorDiscountKey: indicatorDiscount,
+      };
 
-      console.log('Данные успешно добавлены:', docRef.id , docName.id);
-    } catch (error) {
-      console.error('Ошибка при добавлении данных:', error);
+      const colectionsNameData = {
+        collectionName: customCollectionName
+      }
+
+      try {
+        const docRef = await addDoc(collectionRef, documentData);
+        const docName = await addDoc(nameData, colectionsNameData);
+
+        console.log('Данные успешно добавлены:', docRef.id , docName.id);
+      } catch (error) {
+        console.error('Ошибка при добавлении данных:', error);
+      }
+    } else {
+      setCollectionExists(true);
+
+      // Устанавливаем задержку перед скрытием сообщения
+      setTimeout(() => {
+        setCollectionExists(false);
+      }, 5000);
     }
   };
-  
   
   return (
     <div className='app-conteiner'>
@@ -90,9 +97,15 @@ function App() {
                 <div className='form-container'>
                   <div className='choose-category'>
                     <button onClick={(event) => handleCategoryClick(event, true)} className={`chose-button${chooseCategory ? ' active' : ''}`}>Існуюча категорія</button>
-                    <button onClick={(event) => handleCategoryClick(event, false) } className={`chose-button${chooseCategory ? '' : ' active'}`}>Нова категорія</button>
+                    <button onClick={(event) => handleCategoryClick(event, false)} className={`chose-button${chooseCategory ? '' : ' active'}`}>Нова категорія</button>
                   </div>
 
+                  {collectionExists && (
+                    <div style={{ color: 'yellow' }}>
+                      Коллекция с таким именем уже существует. Введите другое имя коллекции!
+                    </div>
+                  )}
+                  
                   {chooseCategory ? <CategorySellect onCategoryChange={handleCategoryChange}/> :
                   <CategoryInput 
                     htmlFor={"category"}  
@@ -189,24 +202,23 @@ function App() {
                 </div>
                 <button type="submit">Створити</button>
               </form>
-            </div>
+          </div>
         </section>
         <section className='pages-section'>
           <div className='search-block'>
             <input type="tel" name="search" id="" placeholder='search' />
             <button>search</button>
           </div>
-          
           <div className='pages-block'>
-          <Routes>
-            <Route path="/" element={<FirstPage />} />
-            <Route path="/collections/:collectionName" element={<CollectionPage />} />
-          </Routes>
+            <Routes>
+              <Route path="/" element={<FirstPage />} />
+              <Route path="/collections/:collectionName" element={<CollectionPage />} />
+            </Routes>
           </div>
         </section>
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
