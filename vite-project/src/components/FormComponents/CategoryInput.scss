@@ -1,0 +1,13 @@
+.input-inem{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 5px 0;
+    input{
+        width: 100%;
+    }
+    label{
+      font-size: 20px;
+    }
+    
+}

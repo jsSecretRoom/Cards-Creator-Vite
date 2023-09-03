@@ -4,6 +4,9 @@ import { getFirestore, collection, addDoc, query, where, getDocs } from 'firebas
 import { app } from '../firebase';
 import { Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './auth';
+
+import ShovButton from './components/ShovButton/ShovButton';
+import CardVisible from './components/CardVisible/CardVisible';
 import CategoryInput from './components/FormComponents/CategoryInput';
 import CategorySellect from './components/FormComponents/CategorySellect';
 import CheckboxComponent from './components/FormComponents/CheckboxComponent';
@@ -16,7 +19,7 @@ function App() {
   const [chooseCategory, setCategory] = useState(false);
   const [categoryValue, setCategoryValue] = useState('');
   const [customCollectionName, setCustomCollectionName] = useState('');
-  const [collectionExists, setCollectionExists] = useState(false); // Состояние для проверки существования коллекции
+  const [collectionExists, setCollectionExists] = useState(false);
 
   const [productName, setProductNameValue] = useState('');
   const [productDescription, setProductDescriptionValue] = useState('');
@@ -29,6 +32,8 @@ function App() {
   const [indicatorInclude, setIndicatorInclude] = useState(false);
   const [indicatorEnd, setIndicatorEnd] = useState(false);
   const [indicatorDiscount, setIndicatorDiscount] = useState(false);
+
+  
 
   const handleCategoryClick = (event, isExistingCategory) => {
     event.preventDefault();
@@ -93,8 +98,11 @@ function App() {
             <AuthProvider/>
           </section>
           <div className='create-block'>
+              <ShovButton/>
               <form onSubmit={handleSubmit}>
+
                 <div className='form-container'>
+
                   <div className='choose-category'>
                     <button onClick={(event) => handleCategoryClick(event, true)} className={`chose-button${chooseCategory ? ' active' : ''}`}>Існуюча категорія</button>
                     <button onClick={(event) => handleCategoryClick(event, false)} className={`chose-button${chooseCategory ? '' : ' active'}`}>Нова категорія</button>
@@ -212,6 +220,7 @@ function App() {
           <div className='pages-block'>
             <Routes>
               <Route path="/" element={<FirstPage />} />
+              <Route path="/createcard" element={<CardVisible/>} />
               <Route path="/collections/:collectionName" element={<CollectionPage />} />
             </Routes>
           </div>
