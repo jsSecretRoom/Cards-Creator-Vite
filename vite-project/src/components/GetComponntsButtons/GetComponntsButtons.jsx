@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { GetAllCollectionName } from '../FormComponents/GetAllColectionsName';
 
-function GetComponntsButtons({ onCategoryChange }) {
+function GetComponntsButtons() {
   const [collectionNames, setCollectionNames] = useState([]);
 
   useEffect(() => {

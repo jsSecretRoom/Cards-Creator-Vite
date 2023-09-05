@@ -1,9 +1,10 @@
 import './App.scss'
 import React, { useState } from 'react';
-import { getFirestore, collection, addDoc, query, where, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { app } from '../firebase';
 import { Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './auth';
+
 
 import ShovButton from './components/ShovButton/ShovButton';
 import CardVisible from './components/CardVisible/CardVisible';
@@ -21,6 +22,7 @@ function App() {
   const [customCollectionName, setCustomCollectionName] = useState('');
   const [collectionExists, setCollectionExists] = useState(false);
 
+  const [itemId, setItmId] = useState('');
   const [productName, setProductNameValue] = useState('');
   const [productDescription, setProductDescriptionValue] = useState('');
   const [productPhoto, setProductPhotoValue] = useState('');
@@ -32,7 +34,34 @@ function App() {
   const [indicatorInclude, setIndicatorInclude] = useState(false);
   const [indicatorEnd, setIndicatorEnd] = useState(false);
   const [indicatorDiscount, setIndicatorDiscount] = useState(false);
+  
+  const handleEdit = (selectedItem) => {
+    setProductNameValue(selectedItem.productNameKey);
+    setProductDescriptionValue(selectedItem.productDescriptionKey);
+    setProductPhotoValue(selectedItem.productPhotoKey);
+    setInitialPriceValue(selectedItem.initialPriceKey);
+    setDiscountedPriceValue(selectedItem.discountedPriceKey);
+    setIndicatorNew(selectedItem.indicatorNewKey);
+    setIndicatorPopular(selectedItem.indicatorPopularKey);
+    setIndicatorInclude(selectedItem.indicatorIncludeKey);
+    setIndicatorEnd(selectedItem.indicatorEndKey);
+    setIndicatorDiscount(selectedItem.indicatorDiscountKey);
+  };
 
+  const updateFieldsFromCollectionPage = (colectionName, productName, productDescription, productPhoto, initialPrice, discountedPrice, indicatorNew, indicatorPopular, indicatorInclude, indicatorEnd, indicatorDiscount, productId) => {
+    setCustomCollectionName(colectionName)
+    setProductNameValue(productName);
+    setProductDescriptionValue(productDescription);
+    setProductPhotoValue(productPhoto);
+    setInitialPriceValue(initialPrice);
+    setDiscountedPriceValue(discountedPrice);
+    setIndicatorNew(indicatorNew);
+    setIndicatorPopular(indicatorPopular);
+    setIndicatorInclude(indicatorInclude);
+    setIndicatorEnd(indicatorEnd);
+    setIndicatorDiscount(indicatorDiscount);
+    setItmId(productId);
+  };
   
 
   const handleCategoryClick = (event, isExistingCategory) => {
@@ -46,46 +75,84 @@ function App() {
   
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const nameData = collection(firestore, 'AllCollections');
-
-    const querySnapshot = await getDocs(query(nameData, where('collectionName', '==', customCollectionName)));
-
-    if (querySnapshot.empty) {
-      const collectionRef = collection(firestore, chooseCategory ? categoryValue : customCollectionName);
-
-      const documentData = {
-        productNameKey: productName,
-        productDescriptionKey: productDescription,
-        productPhotoKey: productPhoto,
-        initialPriceKey: initialPrice,
-        discountedPriceKey: discountedPrice,
-        indicatorNewKey: indicatorNew,
-        indicatorPopularKey: indicatorPopular,
-        indicatorIncludeKey: indicatorInclude,
-        indicatorEndKey: indicatorEnd,
-        indicatorDiscountKey: indicatorDiscount,
-      };
-
-      const colectionsNameData = {
-        collectionName: customCollectionName
-      }
-
-      try {
-        const docRef = await addDoc(collectionRef, documentData);
-        const docName = await addDoc(nameData, colectionsNameData);
-
-        console.log('Данные успешно добавлены:', docRef.id , docName.id);
-      } catch (error) {
-        console.error('Ошибка при добавлении данных:', error);
+    
+    const documentData = {
+      productNameKey: productName,
+      productDescriptionKey: productDescription,
+      productPhotoKey: productPhoto,
+      initialPriceKey: initialPrice,
+      discountedPriceKey: discountedPrice,
+      indicatorNewKey: indicatorNew,
+      indicatorPopularKey: indicatorPopular,
+      indicatorIncludeKey: indicatorInclude,
+      indicatorEndKey: indicatorEnd,
+      indicatorDiscountKey: indicatorDiscount,
+    };
+  
+    if (!itemId) {
+      // Если itemId пустой, значит, мы добавляем новый элемент
+  
+      // Проверяем, выбрана ли категория из селекта
+      if (chooseCategory) {
+        const collectionRef = collection(firestore, categoryValue);
+  
+        try {
+          const docRef = await addDoc(collectionRef, documentData);
+          console.log('Данные успешно добавлены в выбранную коллекцию:', docRef.id);
+        } catch (error) {
+          console.error('Ошибка при добавлении данных:', error);
+          // Возможно, здесь стоит показать сообщение пользователю
+        }
+        
+      } else {
+        // Если выбрана новая категория, проверяем, существует ли она
+        const nameData = collection(firestore, 'AllCollections');
+        const querySnapshot = await getDocs(query(nameData, where('collectionName', '==', customCollectionName)));
+  
+        if (querySnapshot.empty) {
+          // Создаем новую коллекцию и добавляем в нее элемент
+          const collectionRef = collection(firestore, customCollectionName);
+  
+          try {
+            const docRef = await addDoc(collectionRef, documentData);
+            // Теперь добавляем название новой коллекции в AllCollections
+            const colectionsNameData = {
+              collectionName: customCollectionName
+            }
+            const docName = await addDoc(nameData, colectionsNameData);
+            console.log('Данные успешно добавлены в новую коллекцию:', docRef.id, docName.id);
+            
+          } catch (error) {
+            console.error('Ошибка при добавлении данных:', error);
+            // Возможно, здесь стоит показать сообщение пользователю
+          }
+        } else {
+          // Если коллекция с таким именем уже существует, показываем сообщение
+          setCollectionExists(true);
+  
+          // Устанавливаем задержку перед скрытием сообщения
+          setTimeout(() => {
+            setCollectionExists(false);
+          }, 5000);
+        }
       }
     } else {
-      setCollectionExists(true);
-
-      // Устанавливаем задержку перед скрытием сообщения
-      setTimeout(() => {
-        setCollectionExists(false);
-      }, 5000);
+      // Редактирование существующего элемента
+      const db = getFirestore(app);
+      const collectionRef = collection(db, customCollectionName);
+  
+      try {
+        // Получаем документ по itemId и обновляем его с новыми данными
+        const docRef = doc(collectionRef, itemId);
+        await updateDoc(docRef, documentData);
+  
+        console.log('Данные успешно обновлены:', docRef.id);
+      } catch (error) {
+        console.error('Ошибка при обновлении данных:', error);
+      } finally {
+        // После успешного обновления или в случае ошибки сбрасываем itemId
+        setItmId('');
+      }
     }
   };
   
@@ -219,9 +286,21 @@ function App() {
           </div>
           <div className='pages-block'>
             <Routes>
-              <Route path="/" element={<FirstPage />} />
-              <Route path="/createcard" element={<CardVisible/>} />
-              <Route path="/collections/:collectionName" element={<CollectionPage />} />
+              <Route path="/" element={<FirstPage/>} />
+              <Route path="/createcard" element={<CardVisible 
+                productName={productName}
+                productDescription={productDescription}
+                productPhoto={productPhoto}
+                initialPrice={initialPrice}
+                discountedPrice={discountedPrice}
+                indicatorNew={indicatorNew}
+                indicatorPopular={indicatorPopular}
+                indicatorInclude={indicatorInclude}
+                indicatorEnd={indicatorEnd}
+                indicatorDiscount={indicatorDiscount}/>} 
+                onEdit={handleEdit}
+              />
+              <Route path="/collections/:collectionName" element={<CollectionPage updateFields={updateFieldsFromCollectionPage}/>} />
             </Routes>
           </div>
         </section>
