@@ -1,10 +1,11 @@
 import './App.scss'
+
 import React, { useState } from 'react';
 import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
-import { app } from '../firebase';
 import { Route, Routes } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { app } from '../firebase';
 import { AuthProvider } from './auth';
-
 
 import ShovButton from './components/ShovButton/ShovButton';
 import CardVisible from './components/CardVisible/CardVisible';
@@ -14,52 +15,64 @@ import CheckboxComponent from './components/FormComponents/CheckboxComponent';
 import FirstPage from './components/FirstPage/FirstPage';
 import CollectionPage from './components/CollectionPage/CollectionPage';
 
+import {
+  setProductName,
+  setProductDescription,
+  setProductPhoto,
+  setInitialPrice,
+  setDiscountedPrice
+} from './actions/actions';
+
+import { 
+  toggleIndicatorNew, 
+  toggleIndicatorPopular, 
+  toggleIndicatorInclude, 
+  toggleIndicatorEnd, 
+  toggleIndicatorDiscount
+} from './actions/actions';
+
 export const firestore = getFirestore(app);
 
 function App() {
+  const dispatch = useDispatch();
+
+  const productName = useSelector((state) => state.input.productName);
+  const productDescription = useSelector((state) => state.input.productDescription);
+  const productPhoto = useSelector((state) => state.input.productPhoto);
+  const initialPrice = useSelector((state) => state.input.initialPrice);
+  const discountedPrice = useSelector((state) => state.input.discountedPrice);
+
+  const indicatorNew = useSelector((state) => state.checkbox.indicatorNew);
+  const indicatorPopular = useSelector((state) => state.checkbox.indicatorPopular);
+  const indicatorInclude = useSelector((state) => state.checkbox.indicatorInclude);
+  const indicatorEnd = useSelector((state) => state.checkbox.indicatorEnd);
+  const indicatorDiscount = useSelector((state) => state.checkbox.indicatorDiscount);
+  
+  
   const [chooseCategory, setCategory] = useState(false);
   const [categoryValue, setCategoryValue] = useState('');
   const [customCollectionName, setCustomCollectionName] = useState('');
   const [collectionExists, setCollectionExists] = useState(false);
 
   const [itemId, setItmId] = useState('');
-  const [productName, setProductNameValue] = useState('');
-  const [productDescription, setProductDescriptionValue] = useState('');
-  const [productPhoto, setProductPhotoValue] = useState('');
-  const [initialPrice, setInitialPriceValue] = useState('');
-  const [discountedPrice, setDiscountedPriceValue] = useState('');
 
-  const [indicatorNew, setIndicatorNew] = useState(false);
-  const [indicatorPopular, setIndicatorPopular] = useState(false);
-  const [indicatorInclude, setIndicatorInclude] = useState(false);
-  const [indicatorEnd, setIndicatorEnd] = useState(false);
-  const [indicatorDiscount, setIndicatorDiscount] = useState(false);
   
-  const handleEdit = (selectedItem) => {
-    setProductNameValue(selectedItem.productNameKey);
-    setProductDescriptionValue(selectedItem.productDescriptionKey);
-    setProductPhotoValue(selectedItem.productPhotoKey);
-    setInitialPriceValue(selectedItem.initialPriceKey);
-    setDiscountedPriceValue(selectedItem.discountedPriceKey);
-    setIndicatorNew(selectedItem.indicatorNewKey);
-    setIndicatorPopular(selectedItem.indicatorPopularKey);
-    setIndicatorInclude(selectedItem.indicatorIncludeKey);
-    setIndicatorEnd(selectedItem.indicatorEndKey);
-    setIndicatorDiscount(selectedItem.indicatorDiscountKey);
-  };
-
   const updateFieldsFromCollectionPage = (colectionName, productName, productDescription, productPhoto, initialPrice, discountedPrice, indicatorNew, indicatorPopular, indicatorInclude, indicatorEnd, indicatorDiscount, productId) => {
+
     setCustomCollectionName(colectionName)
-    setProductNameValue(productName);
-    setProductDescriptionValue(productDescription);
-    setProductPhotoValue(productPhoto);
-    setInitialPriceValue(initialPrice);
-    setDiscountedPriceValue(discountedPrice);
-    setIndicatorNew(indicatorNew);
-    setIndicatorPopular(indicatorPopular);
-    setIndicatorInclude(indicatorInclude);
-    setIndicatorEnd(indicatorEnd);
-    setIndicatorDiscount(indicatorDiscount);
+
+    dispatch(setProductName(productName));
+    dispatch(setProductDescription(productDescription));
+    dispatch(setProductPhoto(productPhoto));
+    dispatch(setInitialPrice(initialPrice));
+    dispatch(setDiscountedPrice(discountedPrice));
+    
+    dispatch(toggleIndicatorNew(indicatorNew));
+    dispatch(toggleIndicatorPopular(indicatorPopular));
+    dispatch(toggleIndicatorInclude(indicatorInclude));
+    dispatch(toggleIndicatorEnd(indicatorEnd));
+    dispatch(toggleIndicatorDiscount(indicatorDiscount));
+
     setItmId(productId);
   };
   
@@ -191,7 +204,7 @@ function App() {
                     value={customCollectionName}
                     onChange={(event) => setCustomCollectionName(event.target.value)}
                   />}
-
+                  
                   <CategoryInput 
                     htmlFor="productName" 
                     inputName="Введіть назву продукту:" 
@@ -199,7 +212,7 @@ function App() {
                     id="productName" 
                     name="productName"
                     value={productName}
-                    onChange={(event) => setProductNameValue(event.target.value)}
+                    onChange={(event) => dispatch(setProductName(event.target.value))}
                   />
 
                   <CategoryInput 
@@ -209,7 +222,7 @@ function App() {
                     id="productDescription" 
                     name="productDescription"
                     value={productDescription}
-                    onChange={(event) => setProductDescriptionValue(event.target.value)}
+                    onChange={(event) => dispatch(setProductDescription(event.target.value))}
                   />
 
                   <CategoryInput 
@@ -219,7 +232,7 @@ function App() {
                     id="productPhoto" 
                     name="productPhoto"
                     value={productPhoto}
-                    onChange={(event) => setProductPhotoValue(event.target.value)}
+                    onChange={(event) => dispatch(setProductPhoto(event.target.value))}
                   />
 
                   <CategoryInput 
@@ -229,7 +242,7 @@ function App() {
                     id="initialPrice" 
                     name="initialPrice"
                     value={initialPrice}
-                    onChange={(event) => setInitialPriceValue(event.target.value)}
+                    onChange={(event) => dispatch(setInitialPrice(event.target.value))}
                   />
 
                   <CategoryInput 
@@ -239,41 +252,45 @@ function App() {
                     id="discountedPrice" 
                     name="discountedPrice"
                     value={discountedPrice}
-                    onChange={(event) => setDiscountedPriceValue(event.target.value)}
+                    onChange={(event) => dispatch(setDiscountedPrice(event.target.value))}
                   />
                 </div>
                 <div className='checkbox-conteiner'>
 
-                  <CheckboxComponent 
-                    id="indicatorNew" 
-                    checkboxName="Новинка?"
-                    value={indicatorNew}
-                    onChange={(checked) => setIndicatorNew(checked)}
-                  />
-                  <CheckboxComponent 
-                    id="indicatorPopular" 
-                    checkboxName="Топ продаж?"
-                    value={indicatorPopular}
-                    onChange={(checked) => setIndicatorPopular(checked)}
-                  />
-                  <CheckboxComponent 
-                    id="indicatorInclude" 
-                    checkboxName="Нема в наявності!"
-                    value={indicatorInclude}
-                    onChange={(checked) => setIndicatorInclude(checked)}
-                  />
-                  <CheckboxComponent 
-                    id="indicatorEnd" 
-                    checkboxName="Закінчуеться!"
-                    value={indicatorEnd}
-                    onChange={(checked) => setIndicatorEnd(checked)}
-                  />
-                  <CheckboxComponent 
-                    id="indicatorDiscount" 
-                    checkboxName="Активність- знижки:"
-                    value={indicatorDiscount}
-                    onChange={(checked) => setIndicatorDiscount(checked)}
-                  />
+                <CheckboxComponent 
+                  id="indicatorNew" 
+                  checkboxName="Новинка?"
+                  value={indicatorNew}
+                  onChange={() => dispatch(toggleIndicatorNew())}
+                />
+
+                <CheckboxComponent 
+                  id="indicatorPopular" 
+                  checkboxName="Топ продаж?"
+                  value={indicatorPopular}
+                  onChange={() => dispatch(toggleIndicatorPopular())}
+                />
+
+                <CheckboxComponent 
+                  id="indicatorInclude" 
+                  checkboxName="Нема в наявності!"
+                  value={indicatorInclude}
+                  onChange={() => dispatch(toggleIndicatorInclude())}
+                />
+
+                <CheckboxComponent 
+                  id="indicatorEnd" 
+                  checkboxName="Закінчуеться!"
+                  value={indicatorEnd}
+                  onChange={() => dispatch(toggleIndicatorEnd())}
+                />
+
+                <CheckboxComponent 
+                  id="indicatorDiscount" 
+                  checkboxName="Активність знижки:"
+                  value={indicatorDiscount}
+                  onChange={() => dispatch(toggleIndicatorDiscount())}
+                />
                 </div>
                 <button type="submit">Створити</button>
               </form>
@@ -287,19 +304,7 @@ function App() {
           <div className='pages-block'>
             <Routes>
               <Route path="/" element={<FirstPage/>} />
-              <Route path="/createcard" element={<CardVisible 
-                productName={productName}
-                productDescription={productDescription}
-                productPhoto={productPhoto}
-                initialPrice={initialPrice}
-                discountedPrice={discountedPrice}
-                indicatorNew={indicatorNew}
-                indicatorPopular={indicatorPopular}
-                indicatorInclude={indicatorInclude}
-                indicatorEnd={indicatorEnd}
-                indicatorDiscount={indicatorDiscount}/>} 
-                onEdit={handleEdit}
-              />
+              <Route path="/createcard" element={<CardVisible/>}/>
               <Route path="/collections/:collectionName" element={<CollectionPage updateFields={updateFieldsFromCollectionPage}/>} />
             </Routes>
           </div>

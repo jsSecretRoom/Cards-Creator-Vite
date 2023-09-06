@@ -1,19 +1,21 @@
 import './CardVisible.scss'
 import FavoriteImg from '../../assets/Favorite.svg'
 import backImg from '../../assets/react.svg'
-function CardVisible({
-    productName,
-    productDescription,
-    productPhoto,
-    initialPrice,
-    discountedPrice,
+import { useSelector } from 'react-redux';
 
-    indicatorNew,
-    indicatorPopular,
-    indicatorInclude,
-    indicatorEnd,
-    indicatorDiscount,
-  }) {
+function CardVisible() {
+
+    const productName = useSelector((state) => state.input.productName);
+    const productDescription = useSelector((state) => state.input.productDescription);
+    const productPhoto = useSelector((state) => state.input.productPhoto);
+    const initialPrice = useSelector((state) => state.input.initialPrice);
+    const discountedPrice = useSelector((state) => state.input.discountedPrice);
+  
+    const indicatorNew = useSelector((state) => state.checkbox.indicatorNew);
+    const indicatorPopular = useSelector((state) => state.checkbox.indicatorPopular);
+    const indicatorInclude = useSelector((state) => state.checkbox.indicatorInclude);
+    const indicatorEnd = useSelector((state) => state.checkbox.indicatorEnd);
+    const indicatorDiscount = useSelector((state) => state.checkbox.indicatorDiscount);
     
     return ( 
         <div className="card-macet">
