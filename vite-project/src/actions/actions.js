@@ -26,6 +26,19 @@ export const setDiscountedPrice = (price) => ({
     payload: price,
 });
 
+export const setCategoryValue = (cange) => ({
+    type: 'SET_CATEGORY_VALUE',
+    payload: cange,
+});
+export const setCustomCollectionName = (cange) => ({
+    type: 'SET_CUSTOM_COLLECTION_NAME',
+    payload: cange,
+});
+export const setItemId = (id) => ({
+    type: 'SET_ITEM_ID',
+    payload: id,
+});
+
 //checboxs
 
 export const toggleIndicatorNew = () => ({
@@ -44,6 +57,12 @@ export const toggleIndicatorEnd = () => ({
     type: 'TOGGLE_INDICATOR_END',
 });
 
-  export const toggleIndicatorDiscount = () => ({
+export const toggleIndicatorDiscount = () => ({
     type: 'TOGGLE_INDICATOR_DISCOUNT',
+});
+export const toggleChooseCategory = () => ({
+    type: 'TOGGLE_CHOOSE_CATEGORY',
+});
+export const togglecollectionExists = () => ({
+    type: 'TOGGLE_COLLECTION_EXISTS',
 });

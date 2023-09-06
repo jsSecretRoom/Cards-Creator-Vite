@@ -2,14 +2,31 @@ import './CollectionPage.scss';
 import backImg from '../../assets/react.svg';
 import FavoriteImg from '../../assets/Favorite.svg';
 
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getFirestore, collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { app } from '../../../firebase';
 
+import {
+  setProductName,
+  setProductDescription,
+  setProductPhoto,
+  setInitialPrice,
+  setDiscountedPrice,
+  setCustomCollectionName,
+  setItemId,
+  toggleIndicatorNew, 
+  toggleIndicatorPopular, 
+  toggleIndicatorInclude, 
+  toggleIndicatorEnd, 
+  toggleIndicatorDiscount,
+} from '../../actions/actions';
 
-function CollectionPage(props) {
+function CollectionPage() {
+  const dispatch = useDispatch();
+
   const { collectionName } = useParams();
   const [collectionData, setCollectionData] = useState([]);
 
@@ -105,7 +122,20 @@ function CollectionPage(props) {
               <li>Id: {item.id}</li>
               <button onClick={() => handleDelete(item.id)}>Delete</button>
               <Link to={`/createcard`}>
-                <button onClick={() => props.updateFields(collectionName, item.productNameKey, item.productDescriptionKey, item.productPhotoKey, item.initialPriceKey, item.discountedPriceKey, item.indicatorNewKey, item.indicatorPopularKey, item.indicatorIncludeKey, item.indicatorEndKey, item.indicatorDiscountKey, item.id)}>Редактировать</button>
+                <button onClick={ () => {
+                  setCustomCollectionName(collectionName);
+                    dispatch(setProductName(item.productNameKey));
+                    dispatch(setProductDescription(item.productDescriptionKey));
+                    dispatch(setProductPhoto(item.productPhotoKey));
+                    dispatch(setInitialPrice(item.initialPriceKey));
+                    dispatch(setDiscountedPrice(item.discountedPriceKey));
+                    dispatch(toggleIndicatorNew(item.indicatorNewKey));
+                    dispatch(toggleIndicatorPopular(item.indicatorPopularKey));
+                    dispatch(toggleIndicatorInclude(item.indicatorIncludeKey));
+                    dispatch(toggleIndicatorEnd(item.indicatorEndKey));
+                    dispatch(toggleIndicatorDiscount(item.indicatorDiscountKey));
+                    dispatch(setItemId(item.id));
+                }}>Редактировать</button>
               </Link>
             </ul>
           </div>

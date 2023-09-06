@@ -1,10 +1,13 @@
 // checkboxReducer.js
 const initialState = {
-    indicatorNew: false,
-    indicatorPopular: false,
-    indicatorInclude: false,
-    indicatorEnd: false,
-    indicatorDiscount: false,
+  indicatorNew: false,
+  indicatorPopular: false,
+  indicatorInclude: false,
+  indicatorEnd: false,
+  indicatorDiscount: false,
+
+  chooseCategory: false,
+  collectionExists: false,
 };
   
 const checkboxReducer = (state = initialState, action) => {
@@ -34,6 +37,16 @@ const checkboxReducer = (state = initialState, action) => {
           ...state,
           indicatorDiscount: !state.indicatorDiscount,
         };
+      case 'TOGGLE_CHOOSE_CATEGORY':
+        return {
+          ...state,
+          chooseCategory: !state.chooseCategory,
+        };
+      case 'TOGGLE_COLLECTION_EXISTS':
+        return {
+          ...state,
+          collectionExists: !state.collectionExists,
+        };  
       default:
         return state;
     }

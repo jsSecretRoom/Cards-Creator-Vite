@@ -5,6 +5,10 @@ const initialState = {
   productPhoto: '',
   initialPrice: '',
   discountedPrice: '',
+
+  categoryValue: '',
+  customCollectionName: '',
+  itemId: '',
 };
 
 const inputReducer = (state = initialState, action) => {
@@ -33,6 +37,21 @@ const inputReducer = (state = initialState, action) => {
       return {
         ...state,
         discountedPrice: action.payload,
+      };
+    case 'SET_CATEGORY_VALUE':
+      return {
+        ...state,
+        categoryValue: action.payload,
+      };
+    case 'SET_CUSTOM_COLLECTION_NAME':
+    return {
+      ...state,
+      customCollectionName: action.payload,
+    };
+    case 'SET_ITEM_ID':
+      return {
+        ...state,
+        itemId: action.payload,
       };
     default:
       return state;
