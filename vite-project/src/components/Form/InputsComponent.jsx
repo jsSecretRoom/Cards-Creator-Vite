@@ -1,3 +1,4 @@
+import './InputsComponent.scss';
 
 import CategoryInput from '../../components/FormComponents/CategoryInput';
 import CategorySellect from '../../components/FormComponents/CategorySellect';

@@ -1,0 +1,10 @@
+.form-container {
+    .choose-category{
+      display: flex;
+      
+        .chose-button.active{
+            background-color: crimson;
+            color: white;
+        }
+    }
+}

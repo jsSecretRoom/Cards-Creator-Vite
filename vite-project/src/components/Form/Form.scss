@@ -7,19 +7,4 @@ form{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
-  .form-container {
-    .choose-category{
-      display: flex;
-      
-      .chose-button.active{
-        background-color: crimson;
-        color: white;
-      }
-    }
-  }
-  .checkbox-conteiner {
-    width: 100%;
-    
-  }
 }

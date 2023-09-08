@@ -2,13 +2,12 @@ import './App.scss'
 
 import { Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './firestoreComponen/auth';
-
+import SearchComponent from './components/SearchComponent/SearchComponent';
 import Form from './components/Form/Form';
 import ShovButton from './components/ShovButton/ShovButton';
 import CardVisible from './components/CardVisible/CardVisible';
 import FirstPage from './components/FirstPage/FirstPage';
 import CollectionPage from './components/CollectionPage/CollectionPage';
-
 
 function App() {
 
@@ -26,10 +25,7 @@ function App() {
           </div>
         </section>
         <section className='pages-section'>
-          <div className='search-block'>
-            <input type="tel" name="search" id="" placeholder='search' />
-            <button>search</button>
-          </div>
+          <SearchComponent/>
           <div className='pages-block'>
             <Routes>
               <Route path="/" element={<FirstPage />} />
