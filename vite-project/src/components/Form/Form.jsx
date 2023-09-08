@@ -2,9 +2,8 @@ import './Form.scss';
 import CategoryInput from '../../components/FormComponents/CategoryInput';
 import CategorySellect from '../../components/FormComponents/CategorySellect';
 import CheckboxComponent from '../../components/FormComponents/CheckboxComponent';
+import { handleSubmit } from '../../firestoreComponen/formUtils';
 import { useSelector, useDispatch } from 'react-redux';
-import { app } from '../../../firebase';
-import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
 
 import {
   setProductName,
@@ -13,7 +12,6 @@ import {
   setInitialPrice,
   setDiscountedPrice,
   setCustomCollectionName,
-  setItemId,
 } from '../../actions/actions';
   
 import { 
@@ -22,13 +20,8 @@ import {
   setIndicatorInclude,
   setIndicatorEnd,
   setIndicatorDiscount,
-  
   toggleChooseCategory,
-  toggleCollectionExists,
-    
 } from '../../actions/actions';
-
-export const firestore = getFirestore(app);
 
 function Form() {
     const dispatch = useDispatch();
@@ -47,21 +40,19 @@ function Form() {
   
     const chooseCategory = useSelector((state) => state.checkbox.chooseCategory);
     const collectionExists = useSelector((state) => state.checkbox.collectionExists);
-    
-    const categoryValue = useSelector((state) => state.input.categoryValue);
     const customCollectionName = useSelector((state) => state.input.customCollectionName);
+    const categoryValue = useSelector((state) => state.input.categoryValue);
     const itemId = useSelector((state) => state.input.itemId);
-  
+
     const handleCategoryClick = (event, isExistingCategory) => {
       event.preventDefault();
       if (isExistingCategory !== chooseCategory) {
         dispatch(toggleChooseCategory(isExistingCategory));
       }
     };
-    
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-      
+
+    const handleFormSubmit = (event) => {
+      // Соберите данные формы и передайте их в handleSubmit
       const documentData = {
         productNameKey: productName,
         productDescriptionKey: productDescription,
@@ -74,76 +65,12 @@ function Form() {
         indicatorEndKey: indicatorEnd,
         indicatorDiscountKey: indicatorDiscount,
       };
-    
-      if (!itemId) {
-        // Если itemId пустой, значит, мы добавляем новый элемент
-    
-        // Проверяем, выбрана ли категория из селекта
-        if (chooseCategory) {
-          const collectionRef = collection(firestore, categoryValue);
-    
-          try {
-            const docRef = await addDoc(collectionRef, documentData);
-            console.log('Данные успешно добавлены в выбранную коллекцию:', docRef.id);
-          } catch (error) {
-            console.error('Ошибка при добавлении данных:', error);
-            // Возможно, здесь стоит показать сообщение пользователю
-          }
-          
-        } else {
-          // Если выбрана новая категория, проверяем, существует ли она
-          const nameData = collection(firestore, 'AllCollections');
-          const querySnapshot = await getDocs(query(nameData, where('collectionName', '==', customCollectionName)));
-    
-          if (querySnapshot.empty) {
-            // Создаем новую коллекцию и добавляем в нее элемент
-            const collectionRef = collection(firestore, customCollectionName);
-    
-            try {
-              const docRef = await addDoc(collectionRef, documentData);
-              // Теперь добавляем название новой коллекции в AllCollections
-              const colectionsNameData = {
-                collectionName: customCollectionName
-              }
-              const docName = await addDoc(nameData, colectionsNameData);
-              console.log('Данные успешно добавлены в новую коллекцию:', docRef.id, docName.id);
-              
-            } catch (error) {
-              console.error('Ошибка при добавлении данных:', error);
-              // Возможно, здесь стоит показать сообщение пользователю
-            }
-          } else {
-            // Если коллекция с таким именем уже существует, показываем сообщение
-            dispatch(toggleCollectionExists(true));
-    
-            // Устанавливаем задержку перед скрытием сообщения
-            setTimeout(() => {
-              dispatch(toggleCollectionExists(false));
-            }, 5000);
-          }
-        }
-      } else {
-        // Редактирование существующего элемента
-        const db = getFirestore(app);
-        const collectionRef = collection(db, customCollectionName);
-    
-        try {
-          // Получаем документ по itemId и обновляем его с новыми данными
-          const docRef = doc(collectionRef, itemId);
-          await updateDoc(docRef, documentData);
-    
-          console.log('Данные успешно обновлены:', docRef.id);
-        } catch (error) {
-          console.error('Ошибка при обновлении данных:', error);
-        } finally {
-          // После успешного обновления или в случае ошибки сбрасываем itemId
-          dispatch(setItemId(''));
-        }
-      }
+  
+      handleSubmit(event, documentData, dispatch, chooseCategory, categoryValue, customCollectionName, itemId);
     };
-
+    
     return ( 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleFormSubmit}>
             <div className='form-container'>
                 <div className='choose-category'>
                   <button onClick={(event) => handleCategoryClick(event, true)} className={`chose-button${chooseCategory ? ' active' : ''}`}>Існуюча категорія</button>
