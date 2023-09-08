@@ -144,9 +144,7 @@ function Form() {
 
     return ( 
         <form onSubmit={handleSubmit}>
-
             <div className='form-container'>
-
                 <div className='choose-category'>
                   <button onClick={(event) => handleCategoryClick(event, true)} className={`chose-button${chooseCategory ? ' active' : ''}`}>Існуюча категорія</button>
                   <button onClick={(event) => handleCategoryClick(event, false)} className={`chose-button${chooseCategory ? '' : ' active'}`}>Нова категорія</button>
@@ -160,7 +158,6 @@ function Form() {
                 
                 {chooseCategory ? <CategorySellect/> :
                 <CategoryInput 
-                htmlFor={"category"}  
                 inputName="Категорія:" 
                 type="text" 
                 id="category" 
@@ -170,7 +167,6 @@ function Form() {
                 />}
                 
                 <CategoryInput 
-                htmlFor="productName" 
                 inputName="Введіть назву продукту:" 
                 type="text" 
                 id="productName" 
@@ -180,7 +176,6 @@ function Form() {
                 />
 
                 <CategoryInput 
-                htmlFor="productDescription" 
                 inputName="Введіть опис продукту:" 
                 type="text" 
                 id="productDescription" 
@@ -190,7 +185,6 @@ function Form() {
                 />
 
                 <CategoryInput 
-                htmlFor="productPhoto" 
                 inputName="Введіть лінк на фото продукту:" 
                 type="text" 
                 id="productPhoto" 
@@ -200,7 +194,6 @@ function Form() {
                 />
 
                 <CategoryInput 
-                htmlFor="initialPrice" 
                 inputName="Початкова ціна:" 
                 type="number" 
                 id="initialPrice" 
@@ -210,7 +203,6 @@ function Form() {
                 />
 
                 <CategoryInput 
-                htmlFor="discountedPrice" 
                 inputName="Ціна зі знижкою:" 
                 type="number" 
                 id="discountedPrice" 

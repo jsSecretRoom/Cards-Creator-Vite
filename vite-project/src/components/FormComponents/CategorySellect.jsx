@@ -34,8 +34,8 @@ const CategorySellect = () => {
 
   return (
     <div className="select-container">
-      <label htmlFor="category">Категория: </label>
-      <select className="custom-select" value={selectedOption} onChange={handleOptionChange}>
+      <p htmlFor="category">Категория: </p>
+      <select id="mySelect" name="mySelect" className="custom-select" value={selectedOption} onChange={handleOptionChange}>
         <option value="">Выберите категорию</option>
         {collectionNames.map((name) => (
           <option key={name} value={name}>
