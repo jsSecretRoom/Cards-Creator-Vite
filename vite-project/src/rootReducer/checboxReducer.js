@@ -11,44 +11,49 @@ const initialState = {
 };
   
 const checkboxReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case 'TOGGLE_INDICATOR_NEW':
-        return {
-          ...state,
-          indicatorNew: !state.indicatorNew,
-        };
-      case 'TOGGLE_INDICATOR_POPULAR':
-        return {
-          ...state,
-          indicatorPopular: !state.indicatorPopular,
-        };
-      case 'TOGGLE_INDICATOR_INCLUDE':
-        return {
-          ...state,
-          indicatorInclude: !state.indicatorInclude,
-        };
-      case 'TOGGLE_INDICATOR_END':
-        return {
-          ...state,
-          indicatorEnd: !state.indicatorEnd,
-        };
-      case 'TOGGLE_INDICATOR_DISCOUNT':
-        return {
-          ...state,
-          indicatorDiscount: !state.indicatorDiscount,
-        };
-      case 'TOGGLE_CHOOSE_CATEGORY':
-        return {
-          ...state,
-          chooseCategory: !state.chooseCategory,
-        };
-      case 'TOGGLE_COLLECTION_EXISTS':
-        return {
-          ...state,
-          collectionExists: !state.collectionExists,
-        };  
-      default:
-        return state;
-    }
+  switch (action.type) {
+    case 'SET_INDICATOR_NEW':
+      return {
+        ...state,
+        indicatorNew: action.payload,
+      };
+
+    case 'SET_INDICATOR_POPULAR':
+      return {
+        ...state,
+        indicatorPopular: action.payload,
+      };
+
+    case 'SET_INDICATOR_INCLUDE':
+      return {
+        ...state,
+        indicatorInclude: action.payload,
+      };
+
+    case 'SET_INDICATOR_END':
+      return {
+        ...state,
+        indicatorEnd: action.payload,
+      };
+
+    case 'SET_INDICATOR_DISCOUNT':
+      return {
+        ...state,
+        indicatorDiscount: action.payload,
+      };
+    //---------------
+    case 'TOGGLE_CHOOSE_CATEGORY':
+      return {
+        ...state,
+        chooseCategory: !state.chooseCategory,
+      };
+    case 'TOGGLE_COLLECTION_EXISTS':
+      return {
+        ...state,
+        collectionExists: !state.collectionExists,
+      };  
+    default:
+      return state;
+  }
 };
 export default checkboxReducer;

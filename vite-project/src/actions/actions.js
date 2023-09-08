@@ -1,5 +1,5 @@
 // actions.js
-
+ 
 //inputs
 export const setProductName = (name) => ({
     type: 'SET_PRODUCT_NAME',
@@ -41,28 +41,34 @@ export const setItemId = (id) => ({
 
 //checboxs
 
-export const toggleIndicatorNew = () => ({
-    type: 'TOGGLE_INDICATOR_NEW',
+export const setIndicatorNew = (value) => ({
+    type: 'SET_INDICATOR_NEW',
+    payload: value,
 });
   
-export const toggleIndicatorPopular = () => ({
-    type: 'TOGGLE_INDICATOR_POPULAR',
+export const setIndicatorPopular = (value) => ({
+    type: 'SET_INDICATOR_POPULAR',
+    payload: value,
 });
   
-export const toggleIndicatorInclude = () => ({
-    type: 'TOGGLE_INDICATOR_INCLUDE',
+export const setIndicatorInclude = (value) => ({
+    type: 'SET_INDICATOR_INCLUDE',
+    payload: value,
 });
   
-export const toggleIndicatorEnd = () => ({
-    type: 'TOGGLE_INDICATOR_END',
+export const setIndicatorEnd = (value) => ({
+    type: 'SET_INDICATOR_END',
+    payload: value,
 });
-
-export const toggleIndicatorDiscount = () => ({
-    type: 'TOGGLE_INDICATOR_DISCOUNT',
+  
+export const setIndicatorDiscount = (value) => ({
+    type: 'SET_INDICATOR_DISCOUNT',
+    payload: value,
 });
+//--------------------------//
 export const toggleChooseCategory = () => ({
     type: 'TOGGLE_CHOOSE_CATEGORY',
 });
-export const togglecollectionExists = () => ({
+export const toggleCollectionExists = () => ({
     type: 'TOGGLE_COLLECTION_EXISTS',
 });

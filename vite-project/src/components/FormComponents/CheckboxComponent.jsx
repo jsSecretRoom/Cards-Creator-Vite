@@ -1,4 +1,4 @@
-import './CheckboxComponent.scss';
+import './CheckboxComponent.scss'
 import React from 'react';
 
 function CheckboxComponent({ id, checkboxName, value, onChange }) {

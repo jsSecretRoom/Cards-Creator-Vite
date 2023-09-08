@@ -17,11 +17,14 @@ import {
   setDiscountedPrice,
   setCustomCollectionName,
   setItemId,
-  toggleIndicatorNew, 
-  toggleIndicatorPopular, 
-  toggleIndicatorInclude, 
-  toggleIndicatorEnd, 
-  toggleIndicatorDiscount,
+} from '../../actions/actions';
+  
+import { 
+  setIndicatorNew,
+  setIndicatorPopular,
+  setIndicatorInclude,
+  setIndicatorEnd,
+  setIndicatorDiscount,
 } from '../../actions/actions';
 
 function CollectionPage() {
@@ -123,18 +126,21 @@ function CollectionPage() {
               <button onClick={() => handleDelete(item.id)}>Delete</button>
               <Link to={`/createcard`}>
                 <button onClick={ () => {
-                  setCustomCollectionName(collectionName);
+
+                    dispatch(setCustomCollectionName(collectionName));
                     dispatch(setProductName(item.productNameKey));
                     dispatch(setProductDescription(item.productDescriptionKey));
                     dispatch(setProductPhoto(item.productPhotoKey));
                     dispatch(setInitialPrice(item.initialPriceKey));
                     dispatch(setDiscountedPrice(item.discountedPriceKey));
-                    dispatch(toggleIndicatorNew(item.indicatorNewKey));
-                    dispatch(toggleIndicatorPopular(item.indicatorPopularKey));
-                    dispatch(toggleIndicatorInclude(item.indicatorIncludeKey));
-                    dispatch(toggleIndicatorEnd(item.indicatorEndKey));
-                    dispatch(toggleIndicatorDiscount(item.indicatorDiscountKey));
                     dispatch(setItemId(item.id));
+                    
+                    dispatch(setIndicatorNew(item.indicatorNewKey));
+                    dispatch(setIndicatorPopular(item.indicatorPopularKey));
+                    dispatch(setIndicatorInclude(item.indicatorIncludeKey));
+                    dispatch(setIndicatorEnd(item.indicatorEndKey));
+                    dispatch(setIndicatorDiscount(item.indicatorDiscountKey));
+                    
                 }}>Редактировать</button>
               </Link>
             </ul>

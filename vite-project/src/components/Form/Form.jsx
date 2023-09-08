@@ -3,27 +3,28 @@ import CategoryInput from '../../components/FormComponents/CategoryInput';
 import CategorySellect from '../../components/FormComponents/CategorySellect';
 import CheckboxComponent from '../../components/FormComponents/CheckboxComponent';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { app } from '../../../firebase';
+import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
+
 import {
-    setProductName,
-    setProductDescription,
-    setProductPhoto,
-    setInitialPrice,
-    setDiscountedPrice,
-    setCategoryValue,
-    setCustomCollectionName,
-    setItemId,
+  setProductName,
+  setProductDescription,
+  setProductPhoto,
+  setInitialPrice,
+  setDiscountedPrice,
+  setCustomCollectionName,
+  setItemId,
 } from '../../actions/actions';
   
 import { 
-    toggleIndicatorNew, 
-    toggleIndicatorPopular, 
-    toggleIndicatorInclude, 
-    toggleIndicatorEnd, 
-    toggleIndicatorDiscount,
-    toggleChooseCategory,
-    togglecollectionExists,
+  setIndicatorNew,
+  setIndicatorPopular,
+  setIndicatorInclude,
+  setIndicatorEnd,
+  setIndicatorDiscount,
+  
+  toggleChooseCategory,
+  toggleCollectionExists,
     
 } from '../../actions/actions';
 
@@ -47,17 +48,15 @@ function Form() {
     const chooseCategory = useSelector((state) => state.checkbox.chooseCategory);
     const collectionExists = useSelector((state) => state.checkbox.collectionExists);
     
-    const categoryValue = useSelector((state) => state.checkbox.categoryValue);
-    const customCollectionName = useSelector((state) => state.checkbox.customCollectionName);
-    const itemId = useSelector((state) => state.checkbox.itemId);
+    const categoryValue = useSelector((state) => state.input.categoryValue);
+    const customCollectionName = useSelector((state) => state.input.customCollectionName);
+    const itemId = useSelector((state) => state.input.itemId);
   
     const handleCategoryClick = (event, isExistingCategory) => {
       event.preventDefault();
-      dispatch(toggleChooseCategory(isExistingCategory));
-    };
-  
-    const handleCategoryChange = (selectedCategory) => {
-      dispatch(setCategoryValue(selectedCategory));
+      if (isExistingCategory !== chooseCategory) {
+        dispatch(toggleChooseCategory(isExistingCategory));
+      }
     };
     
     const handleSubmit = async (event) => {
@@ -115,11 +114,11 @@ function Form() {
             }
           } else {
             // Если коллекция с таким именем уже существует, показываем сообщение
-            togglecollectionExists(true);
+            dispatch(toggleCollectionExists(true));
     
             // Устанавливаем задержку перед скрытием сообщения
             setTimeout(() => {
-              togglecollectionExists(false);
+              dispatch(toggleCollectionExists(false));
             }, 5000);
           }
         }
@@ -138,7 +137,7 @@ function Form() {
           console.error('Ошибка при обновлении данных:', error);
         } finally {
           // После успешного обновления или в случае ошибки сбрасываем itemId
-          setItemId('');
+          dispatch(setItemId(''));
         }
       }
     };
@@ -149,8 +148,8 @@ function Form() {
             <div className='form-container'>
 
                 <div className='choose-category'>
-                    <button onClick={(event) => handleCategoryClick(event, true)} className={`chose-button${chooseCategory ? ' active' : ''}`}>Існуюча категорія</button>
-                    <button onClick={(event) => handleCategoryClick(event, false)} className={`chose-button${chooseCategory ? '' : ' active'}`}>Нова категорія</button>
+                  <button onClick={(event) => handleCategoryClick(event, true)} className={`chose-button${chooseCategory ? ' active' : ''}`}>Існуюча категорія</button>
+                  <button onClick={(event) => handleCategoryClick(event, false)} className={`chose-button${chooseCategory ? '' : ' active'}`}>Нова категорія</button>
                 </div>
 
                 {collectionExists && (
@@ -159,7 +158,7 @@ function Form() {
                 </div>
                 )}
                 
-                {chooseCategory ? <CategorySellect onCategoryChange={handleCategoryChange}/> :
+                {chooseCategory ? <CategorySellect/> :
                 <CategoryInput 
                 htmlFor={"category"}  
                 inputName="Категорія:" 
@@ -167,7 +166,7 @@ function Form() {
                 id="category" 
                 name="category"
                 value={customCollectionName}
-                onChange={(event) => setCustomCollectionName(event.target.value)}
+                onChange={(event) => dispatch(setCustomCollectionName(event.target.value))}
                 />}
                 
                 <CategoryInput 
@@ -221,46 +220,44 @@ function Form() {
                 />
             </div>
             <div className='checkbox-conteiner'>
+            <CheckboxComponent 
+              id="indicatorNew" 
+              checkboxName="Новинка?"
+              value={indicatorNew}
+              onChange={(newValue) => dispatch(setIndicatorNew(newValue))}
+            />
 
-                <CheckboxComponent 
-                    id="indicatorNew" 
-                    checkboxName="Новинка?"
-                    value={indicatorNew}
-                    onChange={() => dispatch(toggleIndicatorNew())}
-                />
+            <CheckboxComponent 
+              id="indicatorPopular" 
+              checkboxName="Топ продаж?"
+              value={indicatorPopular}
+              onChange={(newValue) => dispatch(setIndicatorPopular(newValue))}
+            />
 
-                <CheckboxComponent 
-                    id="indicatorPopular" 
-                    checkboxName="Топ продаж?"
-                    value={indicatorPopular}
-                    onChange={() => dispatch(toggleIndicatorPopular())}
-                />
+            <CheckboxComponent 
+              id="indicatorInclude" 
+              checkboxName="Нема в наявності!"
+              value={indicatorInclude}
+              onChange={(newValue) => dispatch(setIndicatorInclude(newValue))}
+            />
 
-                <CheckboxComponent 
-                    id="indicatorInclude" 
-                    checkboxName="Нема в наявності!"
-                    value={indicatorInclude}
-                    onChange={() => dispatch(toggleIndicatorInclude())}
-                />
+            <CheckboxComponent 
+              id="indicatorEnd" 
+              checkboxName="Закінчуеться!"
+              value={indicatorEnd}
+              onChange={(newValue) => dispatch(setIndicatorEnd(newValue))}
+            />
 
-                <CheckboxComponent 
-                    id="indicatorEnd" 
-                    checkboxName="Закінчуеться!"
-                    value={indicatorEnd}
-                    onChange={() => dispatch(toggleIndicatorEnd())}
-                />
-
-                <CheckboxComponent 
-                    id="indicatorDiscount" 
-                    checkboxName="Активність знижки:"
-                    value={indicatorDiscount}
-                    onChange={() => dispatch(toggleIndicatorDiscount())}
-                />
-            </div>
+            <CheckboxComponent 
+              id="indicatorDiscount" 
+              checkboxName="Активність знижки:"
+              value={indicatorDiscount}
+              onChange={(newValue) => dispatch(setIndicatorDiscount(newValue))}
+            />
+          </div>
             <button type="submit">Створити</button>
         </form>
     );
 }
 
-export default Form
-;
+export default Form;

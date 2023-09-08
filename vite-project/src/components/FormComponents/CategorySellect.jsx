@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './CategorySellect.scss';
 import { GetAllCollectionName } from './GetAllColectionsName';
 
-const CategorySellect = ({ onCategoryChange }) => {
+import { useDispatch } from 'react-redux';
+
+import {
+  setCategoryValue,
+} from '../../actions/actions';
+
+const CategorySellect = () => {
+  const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState('');
   const [collectionNames, setCollectionNames] = useState([]);
 
@@ -22,7 +29,7 @@ const CategorySellect = ({ onCategoryChange }) => {
   const handleOptionChange = (event) => {
     const selectedCategory = event.target.value;
     setSelectedOption(selectedCategory);
-    onCategoryChange(selectedCategory);
+    dispatch(setCategoryValue(selectedCategory));
   };
 
   return (

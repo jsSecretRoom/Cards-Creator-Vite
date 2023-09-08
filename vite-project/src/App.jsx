@@ -22,7 +22,7 @@ function App() {
           </section>
           <div className='create-block'>
             <ShovButton />
-            <Form />
+            <Form /> 
           </div>
         </section>
         <section className='pages-section'>

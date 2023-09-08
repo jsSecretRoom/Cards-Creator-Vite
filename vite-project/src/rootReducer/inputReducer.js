@@ -8,8 +8,8 @@ const initialState = {
 
   categoryValue: '',
   customCollectionName: '',
-  itemId: '',
-};
+  itemId: ''
+}; 
 
 const inputReducer = (state = initialState, action) => {
   switch (action.type) {
