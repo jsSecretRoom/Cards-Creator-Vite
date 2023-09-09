@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { getFirestore, collection, getDocs, deleteDoc, query, where, doc, getDoc } from 'firebase/firestore';
 import { app } from '../../../firebase';
 
-const DeleteCategory = () => {
+const DeleteCategory = ({ onCollectionDeletion }) => {
   const [categoryName, setCategoryName] = useState('');
 
   const handleDeleteClick = async () => {
@@ -30,7 +30,7 @@ const DeleteCategory = () => {
       categorySnapshot2.forEach(async (doc) => {
         await deleteDoc(doc.ref);
       });
-
+      onCollectionDeletion();
       console.log(`Колекцію "${categoryName}" видалено.`);
     } catch (error) {
       console.error('Помилка під час видалення колекції:', error);

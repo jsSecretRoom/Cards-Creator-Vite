@@ -5,9 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import InputsComponent from './InputsComponent';
 import CheckboxsComponent from './CheckboxsComponent';
 
-
 function Form() {
   const dispatch = useDispatch();
+  
+
 
   const productName = useSelector((state) => state.input.productName);
   const productDescription = useSelector((state) => state.input.productDescription);
@@ -44,11 +45,13 @@ function Form() {
   };
   
   return ( 
-      <form onSubmit={handleFormSubmit}>
+    <>
+    <form onSubmit={handleFormSubmit}>
         <InputsComponent/>
         <CheckboxsComponent/>
         <button type="submit">Створити</button>
       </form>
+    </>
   );
 }
 

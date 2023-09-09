@@ -2,7 +2,7 @@ import './CardVisible.scss'
 import FavoriteImg from '../../assets/Favorite.svg'
 import backImg from '../../assets/react.svg'
 import { useSelector } from 'react-redux';
-
+import ResetButton from '../Form/ResetButton';
 function CardVisible() {
 
     const productName = useSelector((state) => state.input.productName);
@@ -21,11 +21,10 @@ function CardVisible() {
         <div className="card-macet">
             <div className='card-head'>
                 <button onClick={() => window.history.back()}> <img src={backImg} alt="backImg" />Back</button>
+                <ResetButton/>
             </div>
             <div className="card-decoration">
-                <div className='card-name'>
-                    <h1>{productName}</h1>
-                </div>
+                
                 <div className="card" style={{
                     backgroundColor:    indicatorNew ? '#45FF58' :
                                         indicatorPopular ? '#FF7D34' :

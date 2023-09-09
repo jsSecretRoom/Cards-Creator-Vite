@@ -30,8 +30,13 @@ import {
 function CollectionPage() {
   const dispatch = useDispatch();
 
+  const [searchText, setSearchText] = useState('');
   const { collectionName } = useParams();
   const [collectionData, setCollectionData] = useState([]);
+
+  const handleSearchInputChange = (event) => {
+    setSearchText(event.target.value);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -70,9 +75,20 @@ function CollectionPage() {
         <button onClick={() => window.history.back()}> <img src={backImg} alt="backImg" />Back</button>
         <h2>Коллекція: {collectionName}</h2>
       </div>
-
+      <div className='search-by-id'>
+        <input
+            type="search"
+            name="search"
+            id="search"
+            placeholder='Знайти по id:'
+            value={searchText}
+            onChange={handleSearchInputChange}
+          />
+      </div>
       <div className="card-list">
-        {collectionData.map((item) => (
+        {collectionData
+        .filter((item) => item.id.includes(searchText))
+        .map((item) => (
           <div key={item.id} className='card-container'>
             <div className="card" style={{
                     backgroundColor:    item.indicatorNewKey ? '#45FF58' :

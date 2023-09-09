@@ -1,119 +1,129 @@
 .card-macet{
     .card-head{
-        button{
-            background-color: yellow;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            column-gap: 20px;
-            border: 1px solid rgba(62, 60, 60, 0.113);
-            &:hover{
-                background-color: aqua;
-                color: brown;
-                border: 1px solid white;
-            }
-            img{
-                height: 20px;
-            }
+      button{
+        background-color: yellow;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+        width: 150px;
+        border: 1px solid rgba(62, 60, 60, 0.113);
+        &:hover{
+          background-color: aqua;
+          color: brown;
+          border: 1px solid white;
         }
+        img{
+          height: 20px;
+        }
+      }
     }
     .card-decoration{
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        .card-name{
-            text-align: center;
-        }
+       
         .card {
-            height: 450px;
-            width: 250px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 5px;
-            margin: 20px;
-            border-radius: 10px;
-            .card-head {
-                background-color: white;
-                height: 300px;
-                border-radius: 10px;
-                .fichs {
-                    padding: 10px;
-                    .body-collor {
-                        display: flex;
-                        justify-content: space-between;
-                        height: auto;
-                        
-                        p{
-                            color: black;
-                            background-color: #45FF58; 
-                            padding: 0 10px;
-                            border-radius: 50px;
-                            display: flex;
-                            align-items: center;
-                        }
-                        
-                        img{
-                            height: 30px;
-                        }
-                    }
+            height: 675px; /* Увеличенная высота в 1.5 раза */
+            width: 375px; /* Увеличенная ширина в 1.5 раза */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Увеличенные тени */
+            padding: 7.5px; /* Увеличенные внутренние отступы */
+            margin: 30px; /* Увеличенные внешние отступы */
+            border-radius: 15px; /* Увеличенный радиус границы */
+          }
+          
+          .card-head {
+            background-color: white;
+            height: 450px; /* Увеличенная высота внутреннего блока в 1.5 раза */
+            border-radius: 15px; /* Увеличенный радиус границы */
+            
+            .fichs {
+              padding: 15px; /* Увеличенные внутренние отступы */
+              
+              .body-collor {
+                display: flex;
+                justify-content: space-between;
+                height: auto;
+                
+                p {
+                  color: black;
+                  background-color: #45FF58; 
+                  padding: 0 15px; /* Увеличенные внутренние отступы */
+                  border-radius: 50px;
+                  display: flex;
+                  align-items: center;
                 }
-                .product-foto {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    img{
-                        width: 200px;
-                        height: 220px;
-                        object-fit: cover;
-                        border-radius: 10px;
-                        background-color: rgba(70, 7, 93, 0.299);
-                    }
+                
+                img {
+                  height: 45px; /* Увеличенная высота изображения в 1.5 раза */
                 }
-                .warning-fich {
-                    text-align: center;
-                    p{
-                        color: crimson;
-                    }
-                }
+              }
             }
-            .card-body{
-                background: linear-gradient(90deg, rgba(50, 57, 50, 0.92) 0%, rgba(106, 182, 109, 0.92) 100%);
-                height: 135px;
-                padding: 10px;
-                margin: 5px 0 0 0;
-                border-radius: 10px;
-                .card-deskription{
-                    .product-name{
-                        font-size: 18px;
-                        color: aqua;
-                        overflow-wrap: break-word;
-                        .desc{
-                            color: rgb(255, 255, 255);
-                            font-size: 14px;
-                            overflow-wrap: break-word;
-                        }
-                    }
-                }
-                .charecters{
-                    .price-info {
-                        
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-around;
-                        .price{
-                            color: white;
-                        }
-                        .discountedPrice{
-                            color: crimson;
-                            font-weight: 800;
-                            font-size: 24px;
-                        }
-                        
-                    }
-                    
-                }
+            
+            .product-foto {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              
+              img {
+                width: 300px; /* Увеличенная ширина изображения в 1.5 раза */
+                height: 330px; /* Увеличенная высота изображения в 1.5 раза */
+                object-fit: cover;
+                border-radius: 15px; /* Увеличенный радиус границы */
+                background-color: rgba(70, 7, 93, 0.299);
+              }
             }
-        }
+            
+            .warning-fich {
+              text-align: center;
+              
+              p {
+                color: crimson;
+              }
+            }
+          }
+          
+          .card-body {
+            background: linear-gradient(90deg, rgba(50, 57, 50, 0.92) 0%, rgba(106, 182, 109, 0.92) 100%);
+            height: 202.5px; /* Увеличенная высота внутреннего блока в 1.5 раза */
+            padding: 15px; /* Увеличенные внутренние отступы */
+            margin: 7.5px 0 0 0;
+            border-radius: 15px; /* Увеличенный радиус границы */
+            
+            .card-deskription {
+              .product-name {
+                font-size: 27px; /* Увеличенный размер шрифта в 1.5 раза */
+                color: aqua;
+                overflow-wrap: break-word;
+                
+                .desc {
+                  color: rgb(255, 255, 255);
+                  font-size: 21px; /* Увеличенный размер шрифта в 1.5 раза */
+                  overflow-wrap: break-word;
+                }
+              }
+            }
+            
+            .charecters {
+              .price-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                
+                .price {
+                  color: white;
+                  font-size: 18px; /* Увеличенный размер шрифта в 1.5 раза */
+                }
+                
+                .discountedPrice {
+                  color: crimson;
+                  font-weight: 800;
+                  font-size: 36px; /* Увеличенный размер шрифта в 1.5 раза */
+                }
+              }
+            }
+          }
     }
     
 }

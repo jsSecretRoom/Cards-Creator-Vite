@@ -1,9 +1,8 @@
 .colection {
     .collection-head {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
-        padding: 0 0 20px 0;
         button{
             background-color: yellow;
             border-radius: 50px;
@@ -19,14 +18,17 @@
             img{
                 height: 20px;
             }
-            img{
-                height: 20px;
-            }
+        }
+    }
+    .search-by-id{
+        padding: 20px 0;
+        input{
+            width: 100%;
         }
     }
     .card-list{
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 20px;
         padding: 20px 0 0 0; 
         background-color: white;
@@ -98,6 +100,7 @@
                         }
                     }
                     .charecters{
+                        
                         .price-info {
                             
                             display: flex;
@@ -120,6 +123,7 @@
                 }
             }
             .card-info{
+                width: 250px;
                 background-color: rgb(49, 144, 233);
                 border-radius: 10px;
                 margin: 5px 0 0 0;

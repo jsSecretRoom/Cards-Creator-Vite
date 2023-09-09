@@ -1,42 +1,57 @@
 #root {
-  width: 1600px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  
   .app-conteiner{
-    width: 1440px;
+    width: 100%;
+    @media (min-width: 1700px) {
+      width: 2000px;
+    }
     main{
       display: flex;
+      justify-content: space-between;
       .form-section {
-        width: 490px;
+        flex-grow:1;
+        width: 410px;
         height: auto;
         background-color: #4F4444;
         padding:  0 0 20px 0;
-        .section-name {
-          text-align: center;
-          background-color: #71D14E;
-          margin:  0 0 20px 0;
-          height: 60px;
-        }
-        .authUsers{
-          display: flex;
-          justify-content: center;
-        }
-        .create-block {
-          display: flex;
-          justify-content: center;
-          flex-direction: column;
-          align-items: center;
+        .side-conteiner{
+          position: sticky;
+          z-index: 2;
+          top: 0;
+          .authUsers{
+            display: flex;
+            justify-content: center;
+          }
+          .create-block {
+            padding:  0 10px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            
+            
+          }
         }
       }
       .pages-section {
-        width: 970px;
+        flex-grow:1;
+        width: 1290px;
         background-color: #188C85;
         padding:  0 0 20px 0;
-        
+        .connectid-indicator {
+          padding: 5px 45px;
+          .connectid {
+            display: flex;
+            align-items: center;
+          }
+        }
         .pages-block {
           padding: 20px;
-          margin: 45px;
+          margin: 33px;
           border-radius: 10px;
           background-color: #0F9D95;
         }

@@ -1,10 +1,11 @@
-import './GetComponntsButtons.scss'
+import './GetComponntsButtons.scss';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { GetAllCollectionName } from '../FormComponents/GetAllColectionsName';
 
-function GetComponntsButtons() {
+function GetComponntsButtons({ refresh }) {
   const [collectionNames, setCollectionNames] = useState([]);
+  const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
     async function fetchData() {
@@ -17,16 +18,39 @@ function GetComponntsButtons() {
     }
 
     fetchData();
-  }, []);
+  }, [refresh]);
+
+  // Функция обработки изменения текста поиска
+  const handleSearchTextChange = (event) => {
+    setSearchText(event.target.value);
+  };
+
+  // Фильтрация коллекций на основе текста поиска
+  const filteredCollections = collectionNames.filter((name) =>
+    name.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   return (
-    <ul className='category-list'>
-      {collectionNames.map((name) => (
-        <button key={name}>
-          <Link to={`/collections/${name}`}>{name}</Link>
-        </button>
-      ))}
-    </ul>
+    <div>
+      <div className='category-search'>
+        <p>{filteredCollections.length > 0 ? 'Введіть ім\'я категорії, яку хочете знайти:' : 'Такої категорії не існуе!'}</p>
+        <input
+          type="text"
+          placeholder="Поиск"
+          value={searchText}
+          onChange={handleSearchTextChange}
+        />
+      </div>
+      <ul className='category-list'>
+        {filteredCollections.length > 0 ? (
+          filteredCollections.map((name) => (
+            <button key={name}>
+              <Link to={`/collections/${name}`}>{name}</Link>
+            </button>
+          ))
+        ) : null}
+      </ul>
+    </div>
   );
 }
 
