@@ -2,7 +2,7 @@ import './CollectionPage.scss';
 import backImg from '../../assets/react.svg';
 import FavoriteImg from '../../assets/Favorite.svg';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -32,17 +32,20 @@ function CollectionPage() {
 
   const [searchText, setSearchText] = useState('');
   const { collectionName } = useParams();
-  const [collectionData, setCollectionData] = useState([]);
+  const [collectionData, setCollectionData] = useState([]); 
 
+  const messageTypeIndicator = useSelector((state) => state.indicators.messageType);
+  
   const handleSearchInputChange = (event) => {
     setSearchText(event.target.value);
   };
+
 
   useEffect(() => {
     async function fetchData() {
       const db = getFirestore(app);
       const collectionRef = collection(db, collectionName);
-
+  
       try {
         const querySnapshot = await getDocs(collectionRef);
         const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -51,10 +54,11 @@ function CollectionPage() {
         console.error('Ошибка при загрузке данных коллекции:', error);
       }
     }
-
+  
+    // Вызов функции fetchData при изменении collectionName или messageTypeIndicator
     fetchData();
-  }, [collectionName]);
-
+  }, [collectionName, messageTypeIndicator]);
+  
   const handleDelete = async (id) => {
     const db = getFirestore(app);
     const collectionRef = collection(db, collectionName);

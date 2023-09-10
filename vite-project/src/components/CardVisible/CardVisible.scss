@@ -1,5 +1,10 @@
 .card-macet{
+  display: flex;
+  justify-content: left;
+  width: 100%;
+  position: relative;
     .card-head{
+      
       button{
         background-color: yellow;
         border-radius: 50px;
@@ -23,13 +28,12 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-       
+        flex-grow:1;
         .card {
             height: 675px; /* Увеличенная высота в 1.5 раза */
             width: 375px; /* Увеличенная ширина в 1.5 раза */
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Увеличенные тени */
             padding: 7.5px; /* Увеличенные внутренние отступы */
-            margin: 30px; /* Увеличенные внешние отступы */
             border-radius: 15px; /* Увеличенный радиус границы */
           }
           

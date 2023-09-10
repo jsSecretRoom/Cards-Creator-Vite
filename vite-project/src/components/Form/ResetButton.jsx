@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-
+import ResetSVG from '../../assets/reset-arrow.svg'
 import { 
     setIndicatorNew,
     setIndicatorPopular,
@@ -35,7 +35,11 @@ function ResetButton() {
     }
 
     return ( 
-        <button onClick={setReset} className='reset-button'>Скинути</button>
+        <>
+            
+            <button onClick={setReset} className='reset-button'><img src={ResetSVG} alt="ResetSVG"/>Скинути</button>
+        </>
+        
     );
 }
 

@@ -12,7 +12,6 @@ import ConnectidIndicator from './components/IndicatorsComponents/ConnectidIndic
 
 
 function App() {
-
   return (
     <div className='app-conteiner'>
       <main>
@@ -37,6 +36,7 @@ function App() {
             </Routes>
           </div>
         </section>
+        
       </main>
     </div>
   );

@@ -9,16 +9,12 @@
 }
 ul {
   columns: 2;
-  button{
+  a{
     padding: 0 0;
     height: 30px;
-    color: brown;
-    a{
+    button{
       padding: 4px 12px;
       color: rgb(14, 22, 134);
-      &:hover{
-        color: rgb(57, 0, 95);
-      }
     }
   }
 }

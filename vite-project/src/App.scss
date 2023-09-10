@@ -5,22 +5,25 @@
   justify-content: center;
   
   .app-conteiner{
+    position: relative;
     width: 100%;
-    @media (min-width: 1700px) {
+    @media (min-width: 2000px) {
       width: 2000px;
     }
     main{
       display: flex;
       justify-content: space-between;
+      position: relative;
       .form-section {
         flex-grow:1;
         width: 410px;
         height: auto;
         background-color: #4F4444;
         padding:  0 0 20px 0;
+        
         .side-conteiner{
           position: sticky;
-          z-index: 2;
+          z-index: 4;
           top: 0;
           .authUsers{
             display: flex;
@@ -40,22 +43,28 @@
       .pages-section {
         flex-grow:1;
         width: 1290px;
+        height: auto;
         background-color: #188C85;
         padding:  0 0 20px 0;
         .connectid-indicator {
+          z-index: 4;
           padding: 5px 45px;
+          position: relative;
           .connectid {
             display: flex;
             align-items: center;
           }
         }
         .pages-block {
+          position: relative;
+          z-index: 4;
           padding: 20px;
           margin: 33px;
           border-radius: 10px;
           background-color: #0F9D95;
         }
       }
+      
     }
   }
 }

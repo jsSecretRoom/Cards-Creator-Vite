@@ -35,6 +35,9 @@
         padding: 20px;
         border-radius: 10px;
         .card-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             .card {
                 height: 450px;
                 width: 250px;
@@ -124,6 +127,7 @@
             }
             .card-info{
                 width: 250px;
+                height: 140px;
                 background-color: rgb(49, 144, 233);
                 border-radius: 10px;
                 margin: 5px 0 0 0;
@@ -143,6 +147,7 @@
                     display: flex;
                     justify-content: center;
                     button{
+                        height: 42px;
                         width: 100%;
                         color: white;
                     }

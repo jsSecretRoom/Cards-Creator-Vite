@@ -44,9 +44,9 @@ function GetComponntsButtons({ refresh }) {
       <ul className='category-list'>
         {filteredCollections.length > 0 ? (
           filteredCollections.map((name) => (
-            <button key={name}>
-              <Link to={`/collections/${name}`}>{name}</Link>
-            </button>
+            <Link key={name} to={`/collections/${name}`}>
+              <button>{name}</button>
+            </Link>
           ))
         ) : null}
       </ul>

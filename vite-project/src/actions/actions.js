@@ -72,3 +72,19 @@ export const toggleChooseCategory = () => ({
 export const toggleCollectionExists = () => ({
     type: 'TOGGLE_COLLECTION_EXISTS',
 });
+
+
+// INDICATORS mASSSAGE
+export const showSuccessMessage = (message) => ({
+    type: 'SHOW_SUCCESS_MESSAGE',
+    payload: message,
+});
+  
+export const showErrorMessage = (message) => ({
+    type: 'SHOW_ERROR_MESSAGE',
+    payload: message,
+});
+  
+export const hideMessage = () => ({
+    type: 'HIDE_MESSAGE',
+});

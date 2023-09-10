@@ -2,7 +2,7 @@
 import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { app } from '../../firebase';
 import { toggleCollectionExists, setItemId } from '../actions/actions';
-
+import { showSuccessMessage, showErrorMessage } from '../actions/actions';
 export const handleSubmit = async (event, documentData, dispatch, chooseCategory, categoryValue, customCollectionName, itemId) => {
   event.preventDefault();
   const firestore = getFirestore(app);
@@ -16,10 +16,11 @@ export const handleSubmit = async (event, documentData, dispatch, chooseCategory
 
       try {
         const docRef = await addDoc(collectionRef, documentData);
-        console.log('Данные успешно добавлены в выбранную коллекцию:', docRef.id);
+        dispatch(showSuccessMessage(`Данні успішно додані в коллекію ${categoryValue}!`));
+
       } catch (error) {
-        console.error('Ошибка при добавлении данных:', error);
-        // Возможно, здесь стоит показать сообщение пользователю
+        console.error('Помилка при додаванні данних!!!', error);
+        dispatch(showErrorMessage(`Помилка при додаванні данних до коллекії ${categoryValue}!!!`));
       }
       
     } else {
@@ -38,11 +39,11 @@ export const handleSubmit = async (event, documentData, dispatch, chooseCategory
             collectionName: customCollectionName
           }
           const docName = await addDoc(nameData, colectionsNameData);
-          console.log('Данные успешно добавлены в новую коллекцию:', docRef.id, docName.id);
-          
+          dispatch(showSuccessMessage(`Данні успішно додані у нову коллекцію: ${customCollectionName}!`));
+
         } catch (error) {
-          console.error('Ошибка при добавлении данных:', error);
-          // Возможно, здесь стоит показать сообщение пользователю
+          console.error('Помилка при додаанні данних:', error);
+          dispatch(showErrorMessage(`Помилка при додаанні данних у нову коллекцію: ${customCollectionName}!!!`));
         }
       } else {
         // Если коллекция с таким именем уже существует, показываем сообщение
@@ -63,10 +64,11 @@ export const handleSubmit = async (event, documentData, dispatch, chooseCategory
       // Получаем документ по itemId и обновляем его с новыми данными
       const docRef = doc(collectionRef, itemId);
       await updateDoc(docRef, documentData);
+      dispatch(showSuccessMessage(`Данні у коллекціі ${customCollectionName} успішно оновленні!`));
 
-      console.log('Данные успешно обновлены:', docRef.id);
     } catch (error) {
       console.error('Ошибка при обновлении данных:', error);
+      dispatch(showErrorMessage('Помилка! Данні не оновились!!!'));
     } finally {
       // После успешного обновления или в случае ошибки сбрасываем itemId
       dispatch(setItemId(''));

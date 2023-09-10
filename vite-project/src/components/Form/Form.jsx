@@ -8,8 +8,6 @@ import CheckboxsComponent from './CheckboxsComponent';
 function Form() {
   const dispatch = useDispatch();
   
-
-
   const productName = useSelector((state) => state.input.productName);
   const productDescription = useSelector((state) => state.input.productDescription);
   const productPhoto = useSelector((state) => state.input.productPhoto);
@@ -46,10 +44,10 @@ function Form() {
   
   return ( 
     <>
-    <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit}>
         <InputsComponent/>
         <CheckboxsComponent/>
-        <button type="submit">Створити</button>
+        <button type="submit">Створити</button> 
       </form>
     </>
   );
