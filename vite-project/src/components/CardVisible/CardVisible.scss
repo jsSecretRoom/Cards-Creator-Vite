@@ -1,133 +1,181 @@
-.card-macet{
+.card-macet {
   display: flex;
   justify-content: left;
   width: 100%;
   position: relative;
-    .card-head{
-      
-      button{
-        background-color: yellow;
-        border-radius: 50px;
-        display: flex;
-        align-items: center;
-        column-gap: 20px;
-        width: 150px;
-        border: 1px solid rgba(62, 60, 60, 0.113);
-        &:hover{
-          background-color: aqua;
-          color: brown;
-          border: 1px solid white;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 900px) {
+    flex-direction: row;
+    align-items: normal;
+  }
+
+  .card-head {
+    button {
+      background-color: yellow;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
+      width: 150px;
+      border: 1px solid rgba(62, 60, 60, 0.113);
+
+      &:hover {
+        background-color: aqua;
+        color: brown;
+        border: 1px solid white;
+      }
+
+      img {
+        height: 20px;
+      }
+    }
+  }
+
+  .card-decoration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .card {
+      width: 250px;
+      height: 460px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      padding: 7.5px;
+      border-radius: 15px;
+
+      @media (min-width: 900px) {
+        height: 675px;
+        width: 375px;
+      }
+
+      .card-head {
+        background-color: white;
+        height: 300px;
+        border-radius: 15px;
+
+        @media (min-width: 900px) {
+          height: 450px;
         }
-        img{
-          height: 20px;
+
+        .fichs {
+          padding: 10px;
+          @media (min-width: 900px) {
+            padding: 15px;
+          }
+          .body-collor {
+            display: flex;
+            justify-content: space-between;
+            height: auto;
+
+            p {
+              color: black;
+              background-color: #45FF58;
+              padding: 0 15px;
+              border-radius: 50px;
+              display: flex;
+              align-items: center;
+            }
+
+            img {
+              height: 30px;
+
+              @media (min-width: 900px) {
+                height: 45px;
+              }
+            }
+          }
+        }
+
+        .product-foto {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 200px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 15px;
+            background-color: rgba(70, 7, 93, 0.299);
+
+            @media (min-width: 900px) {
+              width: 300px;
+              height: 330px;
+            }
+          }
+        }
+
+        .warning-fich {
+          text-align: center;
+
+          p {
+            color: crimson;
+          }
+        }
+      }
+
+      .card-body {
+        background: linear-gradient(
+          90deg,
+          rgba(50, 57, 50, 0.92) 0%,
+          rgba(106, 182, 109, 0.92) 100%
+        );
+        height: 135px;
+        padding: 10px;
+        margin: 7.5px 0 0 0;
+        border-radius: 15px;
+
+        @media (min-width: 900px) {
+          height: 200px;
+          padding: 15px;
+        }
+
+        .card-deskription {
+          .product-name {
+            font-size: 20px;
+            color: aqua;
+            overflow-wrap: break-word;
+
+            .desc {
+              color: rgb(255, 255, 255);
+              font-size: 18px;
+              overflow-wrap: break-word;
+            }
+            @media (min-width: 900px) {
+              font-size: 27px;
+              .desc {
+                font-size: 21px;
+              }
+            }
+          }
+        }
+
+        .charecters {
+          .price-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            .price {
+              color: white;
+              font-size: 18px;
+            }
+
+            .discountedPrice {
+              color: crimson;
+              font-weight: 800;
+              font-size: 26px;
+              @media (min-width: 900px) {
+                font-size: 36px;
+              }
+            }
+          }
         }
       }
     }
-    .card-decoration{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        flex-grow:1;
-        .card {
-            height: 675px; /* Увеличенная высота в 1.5 раза */
-            width: 375px; /* Увеличенная ширина в 1.5 раза */
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Увеличенные тени */
-            padding: 7.5px; /* Увеличенные внутренние отступы */
-            border-radius: 15px; /* Увеличенный радиус границы */
-          }
-          
-          .card-head {
-            background-color: white;
-            height: 450px; /* Увеличенная высота внутреннего блока в 1.5 раза */
-            border-radius: 15px; /* Увеличенный радиус границы */
-            
-            .fichs {
-              padding: 15px; /* Увеличенные внутренние отступы */
-              
-              .body-collor {
-                display: flex;
-                justify-content: space-between;
-                height: auto;
-                
-                p {
-                  color: black;
-                  background-color: #45FF58; 
-                  padding: 0 15px; /* Увеличенные внутренние отступы */
-                  border-radius: 50px;
-                  display: flex;
-                  align-items: center;
-                }
-                
-                img {
-                  height: 45px; /* Увеличенная высота изображения в 1.5 раза */
-                }
-              }
-            }
-            
-            .product-foto {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              
-              img {
-                width: 300px; /* Увеличенная ширина изображения в 1.5 раза */
-                height: 330px; /* Увеличенная высота изображения в 1.5 раза */
-                object-fit: cover;
-                border-radius: 15px; /* Увеличенный радиус границы */
-                background-color: rgba(70, 7, 93, 0.299);
-              }
-            }
-            
-            .warning-fich {
-              text-align: center;
-              
-              p {
-                color: crimson;
-              }
-            }
-          }
-          
-          .card-body {
-            background: linear-gradient(90deg, rgba(50, 57, 50, 0.92) 0%, rgba(106, 182, 109, 0.92) 100%);
-            height: 202.5px; /* Увеличенная высота внутреннего блока в 1.5 раза */
-            padding: 15px; /* Увеличенные внутренние отступы */
-            margin: 7.5px 0 0 0;
-            border-radius: 15px; /* Увеличенный радиус границы */
-            
-            .card-deskription {
-              .product-name {
-                font-size: 27px; /* Увеличенный размер шрифта в 1.5 раза */
-                color: aqua;
-                overflow-wrap: break-word;
-                
-                .desc {
-                  color: rgb(255, 255, 255);
-                  font-size: 21px; /* Увеличенный размер шрифта в 1.5 раза */
-                  overflow-wrap: break-word;
-                }
-              }
-            }
-            
-            .charecters {
-              .price-info {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                
-                .price {
-                  color: white;
-                  font-size: 18px; /* Увеличенный размер шрифта в 1.5 раза */
-                }
-                
-                .discountedPrice {
-                  color: crimson;
-                  font-weight: 800;
-                  font-size: 36px; /* Увеличенный размер шрифта в 1.5 раза */
-                }
-              }
-            }
-          }
-    }
-    
+  }
 }

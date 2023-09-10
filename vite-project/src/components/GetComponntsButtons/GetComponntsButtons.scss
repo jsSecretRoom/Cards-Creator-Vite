@@ -8,7 +8,10 @@
   }
 }
 ul {
-  columns: 2;
+  columns: 1;
+  @media (min-width: 975px) {
+    columns: 2;
+  }
   a{
     padding: 0 0;
     height: 30px;

@@ -2,7 +2,12 @@
     .collection-head {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        
+        flex-direction: column;
+        @media (min-width: 768px) {
+            flex-direction: row;
+            align-items: center;
+        }
         button{
             background-color: yellow;
             border-radius: 50px;
@@ -28,12 +33,21 @@
     }
     .card-list{
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         gap: 20px;
         padding: 20px 0 0 0; 
         background-color: white;
         padding: 20px;
         border-radius: 10px;
+        @media (min-width: 924px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (min-width: 1350px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @media (min-width: 1620px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
         .card-container{
             display: flex;
             flex-direction: column;

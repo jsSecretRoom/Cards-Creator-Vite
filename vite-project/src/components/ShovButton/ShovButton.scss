@@ -1,21 +1,28 @@
 .shov-form{
-  width: 350px;
+  width: 100%;
   display: flex;
   justify-content: center;
-
+  @media (min-width: 1180px) {
+    width: 350px;
+  }
   a{
     text-align: center;
     background-color: rgb(232, 232, 27);
     width: 100%;
     padding: 10px 10px;
-    margin: 0 0 20px 0;
-    width: 350px;
-    border-radius: 50px;
+    margin: 0;
+    width: 100%;
+    border-radius: 0;
     border: 1px solid rgba(62, 60, 60, 0.113);
     &:hover{
       background-color: aqua;
       color: brown;
       border: 1px solid white;
+    }
+    @media (min-width: 1020px) {
+      margin: 0 0 20px 0;
+      width: 350px;
+      border-radius: 50px;
     }
   }
 }

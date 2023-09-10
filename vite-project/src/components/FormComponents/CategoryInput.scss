@@ -4,8 +4,12 @@
     row-gap: 10px;
     padding: 5px 0;
     input{
+      width: 300px;
+      @media (min-width: 1140px) {
         width: 100%;
+      }
     }
+
     label{
       font-size: 20px;
     }

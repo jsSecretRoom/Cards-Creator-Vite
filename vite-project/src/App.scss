@@ -12,15 +12,26 @@
     }
     main{
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       position: relative;
+      flex-direction: column;
+      align-items: center;
+
+      @media (min-width: 640px) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: normal;
+      }
       .form-section {
         flex-grow:1;
-        width: 410px;
+        width: 100%;
+        min-height: 100vh;
         height: auto;
         background-color: #4F4444;
         padding:  0 0 20px 0;
-        
+        @media (min-width: 640px) {
+          width: 510px;
+        }
         .side-conteiner{
           position: sticky;
           z-index: 4;
@@ -30,22 +41,31 @@
             justify-content: center;
           }
           .create-block {
-            padding:  0 10px;
+            padding:  0;
             display: flex;
             justify-content: center;
             flex-direction: column;
             align-items: center;
-            
+            @media (min-width: 1020px) {
+              padding:  0 10px;
+            }
             
           }
         }
       }
       .pages-section {
         flex-grow:1;
-        width: 1290px;
+        width: 100%;
+        min-height: 100vh;
         height: auto;
         background-color: #188C85;
-        padding:  0 0 20px 0;
+        padding:  13px 0 20px 0;
+        @media (min-width: 640px) {
+          width: 1290px;
+        }
+        @media (min-width: 1020px) {
+          padding:  0px 0 20px 0;
+        }
         .connectid-indicator {
           z-index: 4;
           padding: 5px 45px;
@@ -58,10 +78,18 @@
         .pages-block {
           position: relative;
           z-index: 4;
-          padding: 20px;
-          margin: 33px;
-          border-radius: 10px;
-          background-color: #0F9D95;
+          padding: 10px;
+          margin: 0px;
+          border-radius: 0;
+          background-color: #188C85;
+          @media (min-width: 665px) {
+            padding: 20px;
+          }
+          @media (min-width: 1020px) {
+            margin: 33px;
+            border-radius: 10px;
+            background-color: #0F9D95;
+          }
         }
       }
       
