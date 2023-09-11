@@ -1,24 +1,32 @@
 import './GetComponntsButtons.scss';
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import { GetAllCollectionName } from '../FormComponents/GetAllColectionsName';
 
 function GetComponntsButtons({ refresh }) {
+  
   const [collectionNames, setCollectionNames] = useState([]);
   const [searchText, setSearchText] = useState('');
+  
+  const messageTypeIndicator = useSelector((state) => state.indicators.messageType);
+  
+  
 
   useEffect(() => {
     async function fetchData() {
       try {
         const rootCollections = await GetAllCollectionName();
         setCollectionNames(rootCollections);
+        
       } catch (error) {
         console.error('Ошибка при загрузке коллекций:', error);
       }
     }
 
     fetchData();
-  }, [refresh]);
+  }, [refresh, messageTypeIndicator]);
 
   // Функция обработки изменения текста поиска
   const handleSearchTextChange = (event) => {
@@ -35,6 +43,7 @@ function GetComponntsButtons({ refresh }) {
       <div className='category-search'>
         <p>{filteredCollections.length > 0 ? 'Введіть ім\'я категорії, яку хочете знайти:' : 'Такої категорії не існуе!'}</p>
         <input
+          name='searchById'
           type="text"
           placeholder="Поиск"
           value={searchText}

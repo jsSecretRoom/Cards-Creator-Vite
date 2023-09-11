@@ -3,6 +3,12 @@ import FavoriteImg from '../../assets/Favorite.svg'
 import backImg from '../../assets/react.svg'
 import { useSelector } from 'react-redux';
 import ResetButton from '../Form/ResetButton';
+export  function truncateText(text, maxLength) {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength - 3) + '...';
+    }
+    return text;
+}
 function CardVisible() {
 
     const productName = useSelector((state) => state.input.productName);
@@ -16,6 +22,12 @@ function CardVisible() {
     const indicatorInclude = useSelector((state) => state.checkbox.indicatorInclude);
     const indicatorEnd = useSelector((state) => state.checkbox.indicatorEnd);
     const indicatorDiscount = useSelector((state) => state.checkbox.indicatorDiscount);
+    
+    const maxProductNameLength = 30;
+    const maxDescriptionLength = 33;
+
+    const truncatedProductName = truncateText(productName, maxProductNameLength);
+    const truncatedDescription = truncateText(productDescription, maxDescriptionLength);
     
     return ( 
         <div className="card-macet">
@@ -60,7 +72,7 @@ function CardVisible() {
                     </div>
                     <div className='card-body'>
                         <div className='card-deskription'>
-                            <p className='product-name'>{productName}<span className='desc'> {productDescription}</span></p>
+                            <p className='product-name'>{truncatedProductName}<span className='desc'> {truncatedDescription}</span></p>
                         </div>
                         <div className='charecters'>
                             <div className='price-info'>

@@ -1,7 +1,7 @@
 import './CollectionPage.scss';
 import backImg from '../../assets/react.svg';
 import FavoriteImg from '../../assets/Favorite.svg';
-
+import { truncateText } from '../CardVisible/CardVisible';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
@@ -129,11 +129,11 @@ function CollectionPage() {
               </div>
               <div className='card-body'>
                 <div className='card-deskription'>
-                  <p className='product-name'>{item.productNameKey}<span className='desc'> {item.productDescriptionKey}</span></p>
+                  <p className='product-name'>{truncateText(item.productNameKey, 28)} <span className='desc'>{truncateText(item.productDescriptionKey, 34)}</span></p>
                 </div>
                 <div className='charecters'>
                   <div className='price-info'>
-                      {item.indicatorDiscountKey ? <p className='price'style={{textDecoration: 'line-through', fontSize: '16px'}} >{item.initialPriceKey}$</p> 
+                      {item.indicatorDiscountKey ? <p className='price'style={{textDecoration: 'line-through', fontSize: '16px'}}>{item.initialPriceKey}$</p> 
                       :<p className='price' style={{textDecoration: 'none', fontSize: '22px'}}>{item.initialPriceKey}$</p>}
                       {item.indicatorDiscountKey ? <p className='discountedPrice'>{item.discountedPriceKey}$</p>
                       :<p className='discountedPrice'></p>}

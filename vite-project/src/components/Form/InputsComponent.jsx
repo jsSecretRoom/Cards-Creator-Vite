@@ -35,6 +35,7 @@ function InputsComponent() {
         }
     };
 
+
     return ( 
         <div className='form-container'>
             <div className='choose-category'>

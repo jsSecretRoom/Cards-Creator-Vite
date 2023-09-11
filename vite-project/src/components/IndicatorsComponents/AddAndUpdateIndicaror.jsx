@@ -9,12 +9,12 @@ const AddAndUpdateIndicaror = () => {
 
     useEffect(() => {
         if (message) {
-        setIsModalOpen(true);
+            setIsModalOpen(true);
 
-        setTimeout(() => {
-            setIsModalOpen(false);
-            dispatch(hideMessage());
-        }, 3000); // Закрыть модальное окно через 3 секунды
+            setTimeout(() => {
+                setIsModalOpen(false);
+                dispatch(hideMessage());
+            }, 3000); // Закрыть модальное окно через 3 секунды
         }
     }, [message, dispatch]);
 

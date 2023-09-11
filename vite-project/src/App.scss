@@ -73,6 +73,20 @@
           .connectid {
             display: flex;
             align-items: center;
+            img{
+              width: 30px;
+            }
+            .success-text {
+              color: green;
+            }
+            
+            .failure-text {
+              color: red;
+            }
+            
+            .loading-text {
+              color: yellow;
+            }
           }
         }
         .pages-block {
@@ -86,7 +100,7 @@
             padding: 20px;
           }
           @media (min-width: 1020px) {
-            margin: 33px;
+            margin: 50px 33px 33px 33px;
             border-radius: 10px;
             background-color: #0F9D95;
           }

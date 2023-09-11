@@ -2,8 +2,11 @@ import './DeleteCategory.scss';
 import React, { useState } from 'react';
 import { getFirestore, collection, getDocs, deleteDoc, query, where, doc, getDoc } from 'firebase/firestore';
 import { app } from '../../../firebase';
+import { showSuccessMessage, showErrorMessage } from '../../actions/actions';
+import { useDispatch } from 'react-redux';
 
 const DeleteCategory = ({ onCollectionDeletion }) => {
+  const dispatch = useDispatch();
   const [categoryName, setCategoryName] = useState('');
 
   const handleDeleteClick = async () => {
@@ -22,18 +25,20 @@ const DeleteCategory = ({ onCollectionDeletion }) => {
       // Удаляем категорию из AllCollections
       const categoryDoc = categorySnapshot.docs[0];
       await deleteDoc(categoryDoc.ref);
-      console.log(`Колекцію "${categoryName}" видалено.`);
+      console.log(`Ім'я коллекції "${categoryName}" видалено з AllCollections.`);
 
       // Удаляем соответствующую коллекцию
       const categoryRef = collection(firestore, categoryName);
       const categorySnapshot2 = await getDocs(categoryRef);
+
       categorySnapshot2.forEach(async (doc) => {
         await deleteDoc(doc.ref);
       });
       onCollectionDeletion();
-      console.log(`Колекцію "${categoryName}" видалено.`);
+      dispatch(showSuccessMessage(`Колекцію "${categoryName}" видалено.`));
     } catch (error) {
-      console.error('Помилка під час видалення колекції:', error);
+      console.error(`Помилка під час видалення колекції: ${categoryName}`, error);
+      dispatch(showErrorMessage(`Помилка під час видалення колекції: ${categoryName}`));
     }
   };
 
