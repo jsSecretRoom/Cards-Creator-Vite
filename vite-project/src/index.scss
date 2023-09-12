@@ -179,15 +179,15 @@ button::-moz-focus-inner {
 
 /*----------them----------*/
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    color: #1d4365;
+    color: #fdfffe;
     background-color: #ffffff;
   }
   a:hover {
     color: #1b26ff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #0ba4e0;
   }
 }
