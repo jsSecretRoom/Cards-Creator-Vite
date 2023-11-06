@@ -129,7 +129,7 @@ function CollectionPage() {
             </div>
             <ul className='card-info'>
               <li>Id: {item.id}</li>
-              <DeleteButton id={item.id}/>
+              <DeleteButton id={item.id} handleDelete={handleDelete}/>
               <Link to={`/createcard`}>
                 <RedactButton item={item} collectionName={collectionName}/>
               </Link>

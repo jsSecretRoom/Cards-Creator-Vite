@@ -38,7 +38,7 @@ function RedactButton({item, collectionName}) {
 
     return ( 
         <>
-            <button onClick={setRedactCard(item)}>Редагувати</button>
+            <button onClick={() => setRedactCard(item)}>Редагувати</button>
         </>
         
     );
