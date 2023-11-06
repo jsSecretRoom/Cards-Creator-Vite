@@ -1,5 +1,6 @@
 // inputReducer.js
 const initialState = {
+  
   productName: '',
   productDescription: '',
   productPhoto: '',

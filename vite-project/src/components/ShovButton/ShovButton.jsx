@@ -1,6 +1,6 @@
 import './ShovButton.scss';
 import { Link } from "react-router-dom";
-function ShovButton({shovform}) {
+function ShovButton() {
 
     return ( 
         <div className='shov-form'>

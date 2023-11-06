@@ -2,33 +2,18 @@ import './CollectionPage.scss';
 import backImg from '../../assets/react.svg';
 import FavoriteImg from '../../assets/Favorite.svg';
 import { truncateText } from '../CardVisible/CardVisible';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getFirestore, collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { app } from '../../../firebase';
 
-import {
-  setProductName,
-  setProductDescription,
-  setProductPhoto,
-  setInitialPrice,
-  setDiscountedPrice,
-  setCustomCollectionName,
-  setItemId,
-} from '../../actions/actions';
-  
-import { 
-  setIndicatorNew,
-  setIndicatorPopular,
-  setIndicatorInclude,
-  setIndicatorEnd,
-  setIndicatorDiscount,
-} from '../../actions/actions';
+import RedactButton from '../../buttonsComponent/RedactButton/RedactButton';
+import DeleteButton from '../../buttonsComponent/DeleteButton/DeleteButton';
 
 function CollectionPage() {
-  const dispatch = useDispatch();
+  
 
   const [searchText, setSearchText] = useState('');
   const { collectionName } = useParams();
@@ -39,7 +24,6 @@ function CollectionPage() {
   const handleSearchInputChange = (event) => {
     setSearchText(event.target.value);
   };
-
 
   useEffect(() => {
     async function fetchData() {
@@ -72,6 +56,8 @@ function CollectionPage() {
       console.error('Ошибка при удалении документа:', error);
     }
   };
+
+
 
   return (
     <div className='colection'>
@@ -143,25 +129,9 @@ function CollectionPage() {
             </div>
             <ul className='card-info'>
               <li>Id: {item.id}</li>
-              <button onClick={() => handleDelete(item.id)}>Delete</button>
+              <DeleteButton id={item.id}/>
               <Link to={`/createcard`}>
-                <button onClick={ () => {
-
-                    dispatch(setCustomCollectionName(collectionName));
-                    dispatch(setProductName(item.productNameKey));
-                    dispatch(setProductDescription(item.productDescriptionKey));
-                    dispatch(setProductPhoto(item.productPhotoKey));
-                    dispatch(setInitialPrice(item.initialPriceKey));
-                    dispatch(setDiscountedPrice(item.discountedPriceKey));
-                    dispatch(setItemId(item.id));
-                    
-                    dispatch(setIndicatorNew(item.indicatorNewKey));
-                    dispatch(setIndicatorPopular(item.indicatorPopularKey));
-                    dispatch(setIndicatorInclude(item.indicatorIncludeKey));
-                    dispatch(setIndicatorEnd(item.indicatorEndKey));
-                    dispatch(setIndicatorDiscount(item.indicatorDiscountKey));
-                    
-                }}>Редактировать</button>
+                <RedactButton item={item} collectionName={collectionName}/>
               </Link>
             </ul>
           </div>

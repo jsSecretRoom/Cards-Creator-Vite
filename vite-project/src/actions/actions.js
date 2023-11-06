@@ -5,7 +5,7 @@ export const setProductName = (name) => ({
     type: 'SET_PRODUCT_NAME',
     payload: name,
 });
-  
+   
 export const setProductDescription = (description) => ({
     type: 'SET_PRODUCT_DESCRIPTION',
     payload: description,

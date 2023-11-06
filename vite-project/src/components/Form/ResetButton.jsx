@@ -35,8 +35,7 @@ function ResetButton() {
     }
 
     return ( 
-        <>
-            
+        <>  
             <button onClick={setReset} className='reset-button'><img src={ResetSVG} alt="ResetSVG"/>Скинути</button>
         </>
         

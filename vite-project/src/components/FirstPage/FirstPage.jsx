@@ -13,8 +13,8 @@ function FirstPage() {
           <div className='help-info'>
             <h2>Категорії</h2>
           </div>
-          <GetComponntsButtons refresh={refresh} /> {/* Передаем состояние как пропс */}
-          <DeleteCategory onCollectionDeletion={handleCollectionDeletion} /> {/* Передаем функцию как пропс */}
+          <GetComponntsButtons refresh={refresh} /> 
+          <DeleteCategory onCollectionDeletion={handleCollectionDeletion} />
         </div>
     );
 }
